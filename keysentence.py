@@ -30,10 +30,10 @@ def total(code_list):
         try:
             select_conn=db.select_conn()
 
-            df_a=db.TB_REVIEW_A(select_conn,code)
-            df_b=db.TB_REVIEW_B(select_conn,code)
+            df_A=db.TB_REVIEW_A(select_conn,code)
+            df_B=db.TB_REVIEW_B(select_conn,code)
 
-            df = pd.merge(df_a,df_b,on='REVIEW_DOC_NO')
+            df = pd.merge(df_A,df_B,on='REVIEW_DOC_NO')
             select_conn.close()
         except Exception as e:
             select_conn.close()
