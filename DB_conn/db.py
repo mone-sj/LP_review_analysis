@@ -1,5 +1,6 @@
 #-*- coding: utf-8 -*-
 import pandas as pd
+import numpy as np
 import pymssql
 #from datetime import datetime 
 
@@ -101,11 +102,11 @@ def TB_REVIEW_B(conn,anal_code):
 def TB_anal_00_insert(conn, df):    
     for i, row in df.iterrows():
         cursor=conn.cursor()
-        sql="insert TB_REVIEW_ANAL_00 (REVIEW_DOC_NO, ANAL_CODE, RLT_VALUE_01, RLT_VALUE_02, RLT_VALUE_03) values(%s, %s, %s, %s, %s)"
+        sql="exec dbo.P_MNG_ANA000 @section='SA', @review_doc_no=%s, @anal_code=%s, @rlt_value_01=%s, @rlt_value_02=%s, @rlt_value_03=%s"
         cursor.execute(sql, tuple(row))
-        print("inserted")
+        print("record inserted")
         conn.commit()
-    print("anal00_insert완료")
+    print('anal00완료')
 
 
 # 프로시저 호출
@@ -117,33 +118,63 @@ def TB_anal_01_insert(conn):
 
 def TB_anal_02_insert(conn,df):
     for i, row in df.iterrows():
-        cursor=conn.cursor()
-        if row[1]==0: #키워드
-            sql="exec dbo.P_MNG_ANA002 @section='SA', @anal_code=%s, @keyword_gubun=%s, @keyword_positive=%s, @site_gubun=%s, @rlt_value_01=%s, @rlt_value_02=%s, @rlt_value_03=%s, @rlt_value_04=%s, @rlt_value_05=%s, @rlt_value_06=%s, @rlt_value_07=%s, @rlt_value_08=%s, @rlt_value_09=%s, @rlt_value_10=%s"
-            cursor.execute(sql,tuple(row))
-            print("recode inserted")
-            conn.commit()
+        cursor = conn.cursor()
+        print('data_anal02을 DB에 넣기 위해 for문 들어옴')
+        
+        for col in range(len(df.columns)):
+        # float 값 체크,..
+             if type(row[col]) is np.float:
+                 row[col] = ''
 
-        elif row[1]==1: #핵심문장
-            sql="exec dbo.P_MNG_ANA002 @section='SA', @anal_code=%s, @keyword_gubun=%s, @keyword_positive=%s, @site_gubun=%s, @rlt_value_01=%s, @rlt_value_02=%s, @rlt_value_03=%s, @rlt_value_04=%s, @rlt_value_05=%s"
-            cursor.execute(sql, tuple(row))
-            print("record inserted")
-            conn.commit()
-    print("anal_02_완료")
+        if type(row[4]) is np.float:
+            print('null')
+            continue
+        else:
+            if row[1] == 0:  # 키워드
+                sql = "exec dbo.P_MNG_ANA002 @section = 'SA', @anal_code=%s,@keyword_gubun=%s,@keyword_positive=%s,@site_gubun=%s, @rlt_value_01=%s, @rlt_value_02=%s,@rlt_value_03=%s,@rlt_value_04=%s,@rlt_value_05=%s,@rlt_value_06=%s,@rlt_value_07=%s,@rlt_value_08=%s,@rlt_value_09=%s,@rlt_value_10=%s"
+                #sql = "INSERT INTO TB_REVIEW_ANAL_03 (SITE_GUBUN,PART_GROUP_ID, PART_SUB_ID,PART_ID,KEYWORD_GUBUN,RLT_VALUE_01,RLT_VALUE_02,RLT_VALUE_03, RLT_VALUE_04,RLT_VALUE_05,RLT_VALUE_06,RLT_VALUE_07,RLT_VALUE_08,RLT_VALUE_09,RLT_VALUE_10) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                cursor.execute(sql, tuple(row))
+                print("Record inserted")
+                # the connection is not autocommitted by default, so we must commit to save our changes
+                conn.commit()
+
+            elif row[1] == 1:  # 핵심문장
+                sql = "exec dbo.P_MNG_ANA002 @section = 'SA', @anal_code=%s,@keyword_gubun=%s,@keyword_positive=%s,@site_gubun=%s, @rlt_value_01=%s, @rlt_value_02=%s,@rlt_value_03=%s,@rlt_value_04=%s,@rlt_value_05=%s"
+                #sql = "INSERT INTO TB_REVIEW_ANAL_03 (SITE_GUBUN, PART_GROUP_ID,PART_SUB_ID,PART_ID,KEYWORD_GUBUN,RLT_VALUE_01,RLT_VALUE_02,RLT_VALUE_03, RLT_VALUE_04,RLT_VALUE_05) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                cursor.execute(sql, tuple(row))
+                print("Record inserted")
+                conn.commit()
+
+    print('DB 저장 끝')
 
 def TB_anal_03_insert(conn,df):
     for i, row in df.iterrows():
-        cursor=conn.cursor()
-        if row[1]==0: #키워드
-            sql="exec dbo.P_MNG_ANA003 @section='SA', @anal_code=%s, @keyword_gubun=%s, @site_gubun=%s, @rlt_value_01=%s, @rlt_value_02=%s, @rlt_value_03=%s, @rlt_value_04=%s, @rlt_value_05=%s, @rlt_value_06=%s, @rlt_value_07=%s, @rlt_value_08=%s, @rlt_value_09=%s, @rlt_value_10=%s"
-            cursor.execute(sql,tuple(row))
-            print("recode inserted")
-            conn.commit()
+        cursor = conn.cursor()
+        print('data_anal03을 DB에 넣기 위해 for문 들어옴')
+        
+        for col in range(len(df.columns)):
+        # float 값 체크,..
+             if type(row[col]) is np.float:
+                 row[col] = ''
 
-        elif row[1]==1: #핵심문장
-            sql="exec dbo.P_MNG_ANA003 @section='SA', @anal_code=%s, @keyword_gubun=%s, @site_gubun=%s, @rlt_value_01=%s, @rlt_value_02=%s, @rlt_value_03=%s, @rlt_value_04=%s, @rlt_value_05=%s"
-            cursor.execute(sql, tuple(row))
-            print("record inserted")
-            conn.commit()
-    print("완료")
+        if type(row[3]) is np.float:
+            print('null')
+            continue
+        else:
+            if row[1] == 0:  # 키워드
+                sql = "exec dbo.P_MNG_ANA003 @section = 'SA', @anal_code=%s,@keyword_gubun=%s@site_gubun=%s, @rlt_value_01=%s, @rlt_value_02=%s,@rlt_value_03=%s,@rlt_value_04=%s,@rlt_value_05=%s,@rlt_value_06=%s,@rlt_value_07=%s,@rlt_value_08=%s,@rlt_value_09=%s,@rlt_value_10=%s"
+                #sql = "INSERT INTO TB_REVIEW_ANAL_03 (SITE_GUBUN,PART_GROUP_ID, PART_SUB_ID,PART_ID,KEYWORD_GUBUN,RLT_VALUE_01,RLT_VALUE_02,RLT_VALUE_03, RLT_VALUE_04,RLT_VALUE_05,RLT_VALUE_06,RLT_VALUE_07,RLT_VALUE_08,RLT_VALUE_09,RLT_VALUE_10) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                cursor.execute(sql, tuple(row))
+                print("Record inserted")
+                # the connection is not autocommitted by default, so we must commit to save our changes
+                conn.commit()
+
+            elif row[1] == 1:  # 핵심문장
+                sql = "exec dbo.P_MNG_ANA003 @section = 'SA', @anal_code=%s,@keyword_gubun=%s,@site_gubun=%s, @rlt_value_01=%s, @rlt_value_02=%s,@rlt_value_03=%s,@rlt_value_04=%s,@rlt_value_05=%s"
+                #sql = "INSERT INTO TB_REVIEW_ANAL_03 (SITE_GUBUN, PART_GROUP_ID,PART_SUB_ID,PART_ID,KEYWORD_GUBUN,RLT_VALUE_01,RLT_VALUE_02,RLT_VALUE_03, RLT_VALUE_04,RLT_VALUE_05) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                cursor.execute(sql, tuple(row))
+                print("Record inserted")
+                conn.commit()
+
+    print('DB 저장 끝')
 

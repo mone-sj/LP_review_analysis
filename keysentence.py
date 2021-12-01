@@ -189,21 +189,28 @@ def emo(code_list):
     "RLT_VALUE_06","RLT_VALUE_07","RLT_VALUE_08","RLT_VALUE_09","RLT_VALUE_10"]
     data_anal02=pd.DataFrame(columns=col_name2)
 
-    for i in range(len(code_list)):
+    for i in code_list:
+    #range(len(code_list)):
 
-        code = code_list[i]
+        code = i #code_list[i]
         try:
             select_conn=db.select_conn()
 
-            df=db.TB_REIVEW_join(select_conn,code)
+            df_A=db.TB_REVIEW_A(select_conn,code)
+            df_B=db.TB_REVIEW_B(select_conn,code)
+
+            df = pd.merge(df_A,df_B,on='REVIEW_DOC_NO')
+            select_conn.close()
         except Exception as e:
             select_conn.close()
 
         print(df)
-        select_conn.close()
 
+        conn = db.select_conn()
+        stopword=db.TB_UNUSE_KEYWORD(conn)
+        conn.close()  
 
-        stopword=stopwords('./keys/stopwords_living_ver1.0.txt')
+      
 
         df['REVIEW'] = df['REVIEW'].str.replace(pat=r'[^\w\s]', repl=r' ', regex=True)
         review_content=df['REVIEW'].tolist()
@@ -262,10 +269,11 @@ def emo(code_list):
 
             result_list = result.values.tolist()
             list1 = sum(result_list, [])
+            model_list=[keywords]
 
             pos_keyword_result_df=pd.DataFrame({
                 'ANAL_CODE':analy_cd,
-                'KEYWORD_GUBUN':keywords,
+                'KEYWORD_GUBUN':model_list,
                 'KEYWORD_POSITIVE':pos,
                 'SITE_GUBUN':site,
                 'RLT_VALUE_01' : list1[0],
@@ -288,6 +296,7 @@ def emo(code_list):
             pass
         
         data_anal02 = pd.concat([data_anal02,pos_keyword_result_df],ignore_index=True)
+       
         print(data_anal02)
 
 
@@ -341,7 +350,7 @@ def emo(code_list):
             print(len(list1))
             neg_keyword_result_df=pd.DataFrame({
                 'ANAL_CODE':analy_cd,
-                'KEYWORD_GUBUN':keywords,
+                'KEYWORD_GUBUN':model_list,
                 'KEYWORD_POSITIVE':neg,
                 'SITE_GUBUN':site,
                 'RLT_VALUE_01' : list1[0],
@@ -394,9 +403,10 @@ def emo(code_list):
             result_list = result.values.tolist()
             list1 = sum(result_list, [])
             print(len(list1))
+            model_list =[sentences]
             pos_keys_result_df=pd.DataFrame({
-                'ANALY_CD':analy_cd,
-                'KEYWORD_GUBUN':sentences,
+                'ANAL_CODE':analy_cd,
+                'KEYWORD_GUBUN':model_list,
                 'KEYWORD_POSITIVE' : pos,
                 'SITE_GUBUN':site,
                 'RLT_VALUE_01' : list1[0],
@@ -443,8 +453,8 @@ def emo(code_list):
             list1 = sum(result_list, [])
             print(len(list1))
             pos_keys_result_df=pd.DataFrame({
-                'ANALY_CD':analy_cd,
-                'KEYWORD_GUBUN':sentences,
+                'ANAL_CODE':analy_cd,
+                'KEYWORD_GUBUN':model_list,
                 'KEYWORD_POSITIVE' : neg,
                 'SITE_GUBUN':site,
                 'RLT_VALUE_01' : list1[0],
@@ -456,7 +466,7 @@ def emo(code_list):
         
         except Exception as e:
             print(e)
-            print("{} 긍정리뷰 키센텐스 오류".format(analy_cd))
+            print("{} 부정리뷰 키센텐스 오류".format(analy_cd))
             pass 
 
         data_anal02=pd.concat([data_anal02,pos_keys_result_df],ignore_index=True)
