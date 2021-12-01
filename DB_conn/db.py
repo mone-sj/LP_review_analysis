@@ -43,12 +43,8 @@ def TB_UNUSE_KEYWORD(conn):
     cursor = conn.cursor()
     sql = "select KEY_WORD from TB_UNUSE_KEYWORD"
     cursor.execute(sql)
-    row=cursor.fetchall()
-    col_name=["word"]
-    df=pd.DataFrame(row,columns=col_name)
-    list_df = df.values.tolist()
-    list_df1 = sum(list_df,[])
-    return list_df1
+    row=[item[0] for item in cursor.fetchall()]
+    return row
 
 # TB_REVIEW 날짜별 select
 # select_conn 사용
