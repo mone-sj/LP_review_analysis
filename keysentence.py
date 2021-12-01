@@ -37,8 +37,7 @@ def total(code_list):
         print(df)
         select_conn.close()
 
-
-        stopword=stopwords('./keys/stopwords_living_ver1.0.txt')
+        stopword=db.TB_UNUSE_KEYWORD()
 
         df['REVIEW'] = df['REVIEW'].str.replace(pat=r'[^\w\s]', repl=r' ', regex=True)
         review_content=df['REVIEW'].tolist()

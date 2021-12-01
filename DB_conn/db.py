@@ -39,7 +39,16 @@ def TB_REIVEW_qb(conn):
     print(df.head(2))    
     return df
 
-
+def TB_UNUSE_KEYWORD(conn):
+    cursor = conn.cursor()
+    sql = "select KEY_WORD from TB_UNUSE_KEYWORD"
+    cursor.execute(sql)
+    row=cursor.fetchall()
+    col_name=["word"]
+    df=pd.DataFrame(row,columns=col_name)
+    list_df = df.values.tolist()
+    list_df = sum(list_df,[])
+    return list_df
 
 # TB_REVIEW 날짜별 select
 # select_conn 사용
