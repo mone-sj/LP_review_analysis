@@ -21,7 +21,7 @@ finally:
 print(df)
 select_conn.close()
 
-
+#새로운 리뷰 감성 및 분류분석
 data=classify_empathy.how(df)
 
 anal00=data[['review_doc_no','anal_code','classify','empathy','empathy_score']]
@@ -39,10 +39,10 @@ finally:
 
 
 ##키워드 키센텐스 돌아가야함
-new = data[['anal_code']]
+new = data[['ANAL_CODE']]
 new = new.drop_duplicates()
 
-code_list = new['anal_code'].tolist()
+code_list = new['ANAL_CODE'].tolist()
 print(code_list)
 
 anal3 = keysentence.total(code_list)

@@ -6,7 +6,7 @@ import pymssql
 # DB 연결
 def insert_conn():
     try:
-        server = '211.223.132.46'
+        server = 'ASC-AI.iptime.org'
         database = 'living_paradise'
         username = 'living_paradise '
         password = 'asc1234pw!'
@@ -17,7 +17,7 @@ def insert_conn():
 
 def select_conn():
     try:
-        server = '211.223.132.46'
+        server = 'ASC-AI.iptime.org'
         database = 'living_paradise'
         username = 'living_paradise '
         password = 'asc1234pw!'
@@ -30,6 +30,7 @@ def select_conn():
 '''DB select'''
 # TB_REIVEW all select
 # select_conn 사용
+
 def TB_REIVEW_qb(conn):
     sql="exec dbo.P_MNG_CRW004 @section = 'QB'"
     col_name=["site_gubun","url_addr","review_doc_no","isrt_date","anal_code","company_gubun","review_user","review_dttm","review_grade","review_option_name","review","remark","isrt_user","updt_user","isrt_dttm","updt_dttm"]
@@ -39,12 +40,6 @@ def TB_REIVEW_qb(conn):
     print(df.head(2))    
     return df
 
-def TB_UNUSE_KEYWORD(conn):
-    cursor = conn.cursor()
-    sql = "select KEY_WORD from TB_UNUSE_KEYWORD"
-    cursor.execute(sql)
-    row=[item[0] for item in cursor.fetchall()]
-    return row
 
 # TB_REVIEW 날짜별 select
 # select_conn 사용
@@ -58,13 +53,21 @@ def TB_REIVEW_qa(conn, from_date, to_date):
     df=ori_df[['site_gubun','review_doc_no','anal_code','review']]
     return df
 
+# 불용어 가져오기
+def TB_UNUSE_KEYWORD(conn):
+    cursor = conn.cursor()
+    sql = "select KEY_WORD from TB_UNUSE_KEYWORD"
+    cursor.execute(sql)
+    row=[item[0] for item in cursor.fetchall()]
+    return row
+
 # TB_REVIEW anal_code별 select
 # select_conn 사용
 # keyword&sentence 결과값 반환을 위한 select문으로 감정점수도 함께 select되어 나와야함
 # 필요한 정보는 site_gubun, review, empathy_score
 def TB_REIVEW_join(conn, anal_code):
     cursor = conn.cursor()
-    sql="select A.SITE_GUBUN, A.REVIEW_DOC_NO, A.ANAL_CODE, B.RLT_VALUE_03, REVIEW from TB_REVIEW A inner join TB_REVIEW_ANAL_00 B on A.ANAL_CODE=%s and A.REVIEW_DOC_NO=B.REVIEW_DOC_NO"
+    sql="select A.SITE_GUBUN, A.REVIEW_DOC_NO, A.ANAL_CODE, B.RLT_VALUE_03,A.REVIEW from TB_REVIEW A inner join TB_REVIEW_ANAL_00 B on A.ANAL_CODE=%s and A.REVIEW_DOC_NO=B.REVIEW_DOC_NO"
     cursor.execute(sql, anal_code)
     row=cursor.fetchall()
     col_name=["SITE_GUBUN","REVIEW_DOC_NO","ANAL_CODE","RLT_VALUE_03","REVIEW"]
@@ -74,6 +77,23 @@ def TB_REIVEW_join(conn, anal_code):
     #df=ori_df[['site_gubun','review_doc_no','anal_code','review']]
     return df
 
+def TB_REVIEW_A(conn,anal_code):
+    cursor = conn.cursor()
+    sql="select SITE_GUBUN, REVIEW_DOC_NO, ANAL_CODE, REVIEW from TB_REVIEW where ANAL_CODE=%s "
+    cursor.execute(sql, anal_code)
+    row=cursor.fetchall()
+    col_name=["SITE_GUBUN","REVIEW_DOC_NO","ANAL_CODE","REVIEW"]
+    df_A=pd.DataFrame(row, columns=col_name)
+    return df_A
+
+def TB_REVIEW_B(conn,anal_code):
+    cursor = conn.cursor()
+    sql="select REVIEW_DOC_NO,RLT_VALUE_03 from TB_REVIEW_ANAL_00 where ANAL_CODE=%s "
+    cursor.execute(sql, anal_code)
+    row=cursor.fetchall()
+    col_name=["REVIEW_DOC_NO","RLT_VALUE_03"]
+    df_B=pd.DataFrame(row, columns=col_name)
+    return df_B
 
 ''' DB insert'''
 # TB_anal_00 column
@@ -81,7 +101,7 @@ def TB_REIVEW_join(conn, anal_code):
 def TB_anal_00_insert(conn, df):    
     for i, row in df.iterrows():
         cursor=conn.cursor()
-        #sql="insert TB_REVIEW_ANAL_00 (REVIEW_DOC_NO, ANAL_CODE, RLT_VALUE_01, RLT_VALUE_02, RLT_VALUE_03) values(%s, %s, %s, %s, %s)"
+        sql="insert TB_REVIEW_ANAL_00 (REVIEW_DOC_NO, ANAL_CODE, RLT_VALUE_01, RLT_VALUE_02, RLT_VALUE_03) values(%s, %s, %s, %s, %s)"
         cursor.execute(sql, tuple(row))
         print("inserted")
         conn.commit()

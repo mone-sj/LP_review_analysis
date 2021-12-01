@@ -30,14 +30,19 @@ def total(code_list):
         try:
             select_conn=db.select_conn()
 
-            df=db.TB_REIVEW_join(select_conn,code)
+            df_a=db.TB_REVIEW_A(select_conn,code)
+            df_b=db.TB_REVIEW_B(select_conn,code)
+
+            df = pd.merge(df_a,df_b,on='REVIEW_DOC_NO')
+            select_conn.close()
         except Exception as e:
             select_conn.close()
 
         print(df)
-        select_conn.close()
 
-        stopword=db.TB_UNUSE_KEYWORD()
+        conn = db.select_conn()
+        stopword=db.TB_UNUSE_KEYWORD(conn)
+        conn.close()  
 
         df['REVIEW'] = df['REVIEW'].str.replace(pat=r'[^\w\s]', repl=r' ', regex=True)
         review_content=df['REVIEW'].tolist()

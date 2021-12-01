@@ -6,7 +6,7 @@ import datetime
 # 충북서버 LP용 감정분석 및 분류모델 URL
 #url = 'https://192.168.200.83:30001/deployment/h84b5e7b9deb74c30e55d78f38c3a10d1/'
 empathy_url = 'https://flightbase.acryl.ai/deployment/ha43a1099d17205a660a517a62bfd5203/'
-classify_url = 'https://192.168.200.83:30001/deployment/he1572cbfbabe584b1ea6729b6dc89183/'
+classify_url = 'https://192.168.200.83:30001/deployment/hd9f94c1d7eec27394bce84741124f49b/'
 
 
 
@@ -33,9 +33,9 @@ def how(df):
     for i in range(len(result_df)):
         review=result_df.iloc[i,3]
         # empathy
-        response_empathy=requests.post(empathy_url,json={'text':review},verify=False,timeout=180)
+        response_empathy=requests.post(empathy_url,json={'text':review},verify=True,timeout=180)
         result_empathy=response_empathy.json()
-
+ 
         output_empathy=result_empathy.get('columnchart')[0].get('output')[0]
         output_first_empathy=list(output_empathy.keys())[0]
 
@@ -52,16 +52,13 @@ def how(df):
             score = 1
 
         review=result_df.iloc[i,3]
-
         response_classify = requests.post(classify_url,json={'text':review},verify=False,timeout=180)
-        result_classify = response_classify.json()
+        result_classify=response_classify.json()
+
 
         output_classify=result_classify.get('text')[0]
         output_first_classify=list(output_classify.values())[0]
-        print('done')
-
-
-
+        
         # result_df 추가하기
         result_df.iloc[i,4]=output_first_empathy
         result_df.iloc[i,5]=score
