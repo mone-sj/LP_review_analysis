@@ -47,8 +47,8 @@ def TB_UNUSE_KEYWORD(conn):
     col_name=["word"]
     df=pd.DataFrame(row,columns=col_name)
     list_df = df.values.tolist()
-    list_df = sum(list_df,[])
-    return list_df
+    list_df1 = sum(list_df,[])
+    return list_df1
 
 # TB_REVIEW 날짜별 select
 # select_conn 사용
