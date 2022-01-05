@@ -1,9 +1,12 @@
 #-*- coding: utf-8 -*-
 import requests, sys
 import pandas as pd
-import datetime
-
+import datetime 
+import time
+from .classification import predict
 import urllib3
+
+import classification
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
@@ -70,6 +73,55 @@ def how(df):
         result_df.iloc[i,6]=output_first_classify
         
     return result_df
+
+
+def model_pt(df):
+    print('property+empathy_analysis')
+
+    result_df=df.copy()
+    # 감정,감정점수,분류 결과 컬럼 추가
+    result_df['EMPATHY']='' #row[4]
+    result_df['EMPATHY_SCORE']='' #row[5]
+    result_df['CLASSIFY']='' #row[6]
+    print(result_df.head(2))
+
+
+    for cnt in range(len(result_df)):
+        print('{}번째 property+empathy 분석'.format(cnt+1))
+        # model_id
+        review=result_df.iloc[cnt,3]
+        
+
+        # empathy_classification
+        try:
+            response_empathy=requests.post(empathy_url,json={'text':review},verify=True,timeout=180)
+        except:
+            time.sleep(2)
+            response_empathy=requests.post(empathy_url,json={'text':review},verify=True,timeout=180)
+        
+        result_empathy=response_empathy.json()
+
+        output_empathy=result_empathy.get('columnchart')[0].get('output')[0]
+        output_first_empathy=list(output_empathy.keys())[0]
+
+        # empathy_score
+        if output_first_empathy in score_5:
+            score = 5
+        elif output_first_empathy in score_4:
+            score = 4
+        elif output_first_empathy in score_3:
+            score = 3
+        elif output_first_empathy in score_2:
+            score = 2
+        elif output_first_empathy in score_1:
+            score = 1
+        result_df.iloc[cnt,4]=output_first_empathy
+        result_df.iloc[cnt,5]=score
+
+        classify=predict(review)
+        result_df.iloc[cnt,6]=classify
+    data=result_df[['REVIEW_DOC_NO','PART_ID','CLASSIFY','EMPATHY','EMPATHY_SCORE']]
+    return data
 
 
 
