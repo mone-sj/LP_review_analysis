@@ -1,14 +1,13 @@
 #-*- coding:utf-8 -*-
-
-from struct import pack
+#from struct import pack
 import torch
-import torch.optim as optim
-from tqdm import tqdm, tqdm_notebook
+#import torch.optim as optim
+#from tqdm import tqdm, tqdm_notebook
 from kobert.utils import get_tokenizer
 from kobert.pytorch_kobert import get_pytorch_kobert_model
-from transformers import AdamW
-from transformers.optimization import get_cosine_schedule_with_warmup
-import argparse, os
+#from transformers import AdamW
+#from transformers.optimization import get_cosine_schedule_with_warmup
+import argparse
 from .models import *
 
 p = argparse.ArgumentParser()
@@ -77,31 +76,3 @@ def predict(predict_sentence):
                 test_eval.append("제품상태")
                       
         return test_eval[0]
-
-'''
-# data load
-# path 수정
-path='./data/'
-#path='../empathy_finish_file_211107/'
-file_list=os.listdir(path)
-
-for i in file_list:
-    csv_file_path=str(path+i)
-    df=pd.read_csv(path+i)
-    row_count=len(df.index)
-    print(df)
-
-    review=[]
-    subject_list=[]
-
-    for index in df.index:
-        review=df.iloc[index,7]
-
-        result=predict(review)
-        print(result)
-        subject_list.append(result)
-
-    df['subject']=subject_list
-
-    df.to_csv('./result/classify_'+i, index=False)
-'''

@@ -1,3 +1,6 @@
+# 삭제필요
+# 원위치: /keys/hap.py
+
 import csv
 import pandas as pd
 import numpy as np

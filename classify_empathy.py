@@ -1,12 +1,12 @@
 #-*- coding: utf-8 -*-
 import requests, sys
 import pandas as pd
-import datetime 
+import datetime
 import time
 from .classification import predict
 import urllib3
 
-import classification
+import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
@@ -15,8 +15,6 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 #url = 'https://192.168.200.83:30001/deployment/h84b5e7b9deb74c30e55d78f38c3a10d1/'
 empathy_url = 'https://flightbase.acryl.ai/deployment/ha43a1099d17205a660a517a62bfd5203/'
 classify_url = 'https://192.168.200.83:30001/deployment/hd9f94c1d7eec27394bce84741124f49b/'
-
-
 
 
 # 감정별 점수 리스트
@@ -29,13 +27,13 @@ score_1 = ['외로움', '후회', '실망', '두려움', '싫음', '미워함', 
 
 # 감정분류, 속성분류
 
-def how(df):
+def api(df): # api
     result_df=df.copy()
     #result_df= result_df[0:5]
     # 감정,감정점수,분류 결과 컬럼 추가
-    result_df['empathy']=''
-    result_df['empathy_score']=''
-    result_df['classify']=''
+    result_df['EMPATHY']=''
+    result_df['EMPATHY_SCORE']=''
+    result_df['CLASSIFY']=''
     
    
     for i in range(len(result_df)):
@@ -59,10 +57,9 @@ def how(df):
         elif output_first_empathy in score_1:
             score = 1
 
-        review=result_df.iloc[i,3]
+        # classify
         response_classify = requests.post(classify_url,json={'text':review},verify=False,timeout=180)
         result_classify=response_classify.json()
-
 
         output_classify=result_classify.get('text')[0]
         output_first_classify=list(output_classify.values())[0]
@@ -71,8 +68,9 @@ def how(df):
         result_df.iloc[i,4]=output_first_empathy
         result_df.iloc[i,5]=score
         result_df.iloc[i,6]=output_first_classify
+        data=result_df[['REVIEW_DOC_NO','PART_ID','CLASSIFY','EMPATHY','EMPATHY_SCORE']]
         
-    return result_df
+    return data
 
 
 def model_pt(df):

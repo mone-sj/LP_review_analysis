@@ -1,15 +1,18 @@
 #-*- coding: utf-8 -*-
+# 삭제필요, 원위치: /classification/emp_classify.py
 import requests, sys
 import pandas as pd
 import datetime
 from classification import predict
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # 아크릴서버 LP용 감정분석 모델 URL
 api_url = 'https://flightbase.acryl.ai/deployment/ha43a1099d17205a660a517a62bfd5203/'
+
+# CBIST 감정분석 / 분류분석 모델 URL
 empathy_url = 'https://192.168.200.83:30001/deployment/h84b5e7b9deb74c30e55d78f38c3a10d1/'
 classify_url = 'https://192.168.200.83:30001/deployment/he1572cbfbabe584b1ea6729b6dc89183/'
-
-
 
 
 # 감정별 점수 리스트
@@ -29,10 +32,7 @@ def classify(df):
     result_df['empathy_score']='' #row[5]
     result_df['classify']='' #row[6]
     print(result_df.head(2))
-    print("iterrows전까지 성공")
     
-
-    #for i, row in result_df.iterrows:
     for i in range(len(result_df)):
         review=result_df.iloc[i,3]#row[3]
         # empathy
@@ -58,8 +58,6 @@ def classify(df):
         # result_df 추가하기
         result_df.iloc[i,4]=output_first_empathy
         result_df.iloc[i,5]=score
-        #row[4]=output_first_empathy
-        #row[5]=score
 
 
         # 분류모델 결과
@@ -68,6 +66,3 @@ def classify(df):
         #row[6]=classify_result
         print(result_df)
     return result_df
-
-
-    

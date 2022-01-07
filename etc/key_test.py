@@ -1,4 +1,6 @@
 # -*- coding:utf-8 -*-
+# 삭제필요
+# /keys/key_test.py
 import os, io, time, kss
 from datetime import datetime
 from kss import split_sentences

@@ -1,12 +1,12 @@
-from kss import split_sentences
-from krwordrank.word import KRWordRank
-from krwordrank.sentence import keysentence, summarize_with_sentences, make_vocab_score, MaxScoreTokenizer
-from krwordrank.word import summarize_with_keywords
-from krwordrank.hangle import normalize
-import pandas as pd
+#from kss import split_sentences
+#from krwordrank.word import KRWordRank
+from krwordrank.sentence import keysentence
+#from krwordrank.sentence import summarize_with_sentences, make_vocab_score, MaxScoreTokenizer
+#from krwordrank.word import summarize_with_keywords
+#from krwordrank.hangle import normalize
+#import pandas as pd
 import kss
 
-#
 # 3-1 키센텐스 추출하기
 def keysentence_list(texts, vocab_score, tokenizer):
     keys_list = []  # 리뷰당 키센텐스모음 리스트
@@ -31,7 +31,6 @@ def keysentence_list(texts, vocab_score, tokenizer):
     for key_review in keys_list:
         if key_review not in new_keys_list:
             new_keys_list.append(key_review)  # 한문장만 뽑아냈던 키센텐스가 유일할 경우에만 뉴키센텐스 리스트로
-    #df_list = pd.DataFrame(new_keys_list)
     return new_keys_list
 
 
