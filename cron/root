@@ -1,0 +1,4 @@
+SHELL=/bin/bash
+0 15 * * * * /home/asc/LP_review_analysis/cron/entrypoint.sh >> /var/log/cron.log 2>&1
+# UTC 기준 매일 15시에 실행(KST 시간 00:00:00)
+# Empty Line
