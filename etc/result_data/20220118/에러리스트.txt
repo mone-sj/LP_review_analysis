@@ -1,0 +1,2 @@
+exe.py error	not readable
+exe.py error	'DataFrame' object has no attribute 'drop_duplicate'

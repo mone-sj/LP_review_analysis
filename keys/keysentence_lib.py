@@ -1,6 +1,6 @@
 #-*- coding:utf-8 -*-
 from krwordrank.sentence import keysentence
-import kss, os
+import kss
 import pandas as pd
 from krwordrank.sentence import make_vocab_score, MaxScoreTokenizer
 

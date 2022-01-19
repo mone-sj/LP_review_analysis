@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
-#import os, io, time, kss
 from datetime import datetime
-import time, os
+import time
 import pandas as pd
 import numpy as np
 from keys.keyword_lib import *
@@ -9,13 +8,7 @@ from krwordrank.word import *
 from keys.keysentence_lib import *
 from DB_conn import db
 
-# backup folder create
-today=datetime.now().strftime('%Y%m%d')
-#folder_path=os.getcwd()+'/etc/result_data'
-folder_path=os.getcwd()+'\\etc\\result_data'
-today_path=os.path.join(folder_path,today)
-if not os.path.exists(today_path):
-    os.mkdir(today_path)
+today_path=db.today_path()
 
 time_list=[]                                                    # exe time check
 none_review=[]
@@ -164,8 +157,7 @@ def total(code_list):
 def emo(code_list):
     site_gubun=db.site_gubun_list()     # load crawling site code
 
-    col_name2=["SITE_GUBUN","ANAL_CODE","KEYWORD_GUBUN","KEYWORD_POSITIVE","RLT_VALUE_01","RLT_VALUE_02","RLT_VALUE_03","RLT_VALUE_04","RLT_VALUE_05",
-    "RLT_VALUE_06","RLT_VALUE_07","RLT_VALUE_08","RLT_VALUE_09","RLT_VALUE_10"]
+    col_name2=["ANAL_CODE","KEYWORD_GUBUN","KEYWORD_POSITIVE","SITE_GUBUN","RLT_VALUE_01","RLT_VALUE_02","RLT_VALUE_03","RLT_VALUE_04","RLT_VALUE_05","RLT_VALUE_06","RLT_VALUE_07","RLT_VALUE_08","RLT_VALUE_09","RLT_VALUE_10"]
     data_anal02=pd.DataFrame(columns=col_name2)
 
     review_join=db.TB_REVIEW_join()

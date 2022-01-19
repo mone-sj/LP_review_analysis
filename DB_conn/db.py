@@ -1,9 +1,15 @@
 #-*- coding: utf-8 -*-
 import pandas as pd
 import numpy as np
-import pymssql
+import pymssql, os, smtplib, traceback
+from datetime import datetime
+from email.mime.text import MIMEText
+from email import encoders
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
 
 server = 'ASC-AI.iptime.org'
+host = 'ASC-AI.iptime.org'
 database = 'living_paradise'
 username = 'living_paradise '
 password = 'asc1234pw!'
@@ -12,7 +18,7 @@ password = 'asc1234pw!'
 def insert_conn():
     ''' charset = 'UTF8' '''
     try:
-        conn = pymssql.connect(server, username, password, database, charset="utf8")
+        conn = pymssql.connect(host, username, password, database, charset="utf8")
     except Exception as e:
         print("Error: ", e)
     return conn
@@ -20,7 +26,7 @@ def insert_conn():
 def select_conn():
     ''' charset = 'CP949' '''
     try:
-        conn = pymssql.connect(server, username, password, database, charset="cp949")
+        conn = pymssql.connect(host, username, password, database, charset="cp949")
     except Exception as e:
         print("Error: ", e)
     return conn
@@ -30,7 +36,7 @@ def select_conn():
 def TB_REIVEW_qb():
     '''TB_REVIEW all select func.(cp949)'''
     try:
-        conn=pymssql.connect(server, username, password, database, charset="cp949")
+        conn=pymssql.connect(host, username, password, database, charset="cp949")
         sql="exec dbo.P_MNG_CRW004 @section = 'QB'"
         col_name=["SITE_GUBUN","URL_ADDR","REVIEW_DOC_NO","ISRT_DATE","ANAL_CODE","COMPANY_GUBUN","REVIEW_USER","REVIEW_DTTM","REVIEW_GRADE","REVIEW_OPTION_NAME","REVIEW","REMARK","ISRT_USER","UPDT_USER","ISRT_DTTM","UPDT_DTTM"]
         ori_df=pd.read_sql(sql,conn)
@@ -45,7 +51,7 @@ def TB_REIVEW_qb():
 def TB_REIVEW_qa(from_date, to_date):
     ''' TB_REVIEW 날짜별 select '''
     try:
-        conn = pymssql.connect(server, username, password, database, charset="cp949")
+        conn = pymssql.connect(host, username, password, database, charset="cp949")
         cursor = conn.cursor()
         sql="exec dbo.P_MNG_CRW004 @section = 'QA', @from_date=%s, @to_date=%s"
         cursor.execute(sql,(from_date, to_date))
@@ -64,7 +70,7 @@ def TB_REIVEW_qa(from_date, to_date):
 def TB_UNUSE_KEYWORD():
     ''' 불용어(stopwords) 불러오기 '''
     try:
-        conn = pymssql.connect(server, username, password, database, charset="cp949")
+        conn = pymssql.connect(host, username, password, database, charset="cp949")
         cursor = conn.cursor()
         sql = "select KEY_WORD from TB_UNUSE_KEYWORD"
         cursor.execute(sql)
@@ -78,7 +84,8 @@ def TB_UNUSE_KEYWORD():
 def ANAL00_AanlCode():
     '''TB_ANAL00에 등록된 anal_code list'''
     try:
-        conn = pymssql.connect(server, username, password, database, charset="cp949")
+        conn1=pymssql.connect()
+        conn = pymssql.connect(host, username, password, database, charset="cp949")
         cursor = conn.cursor()
         sql = "select distinct ANAL_CODE from TB_REVIEW_ANAL_00"
         cursor.execute(sql)
@@ -93,7 +100,7 @@ def ANAL00_AanlCode():
 def TB_REVIEW_join():
     '''select TB_REVIEW per anal_code for TB_REVIEW & TB_REVIEW_ANAL00 join'''
     try:
-        conn = pymssql.connect(server, username, password, database, charset="cp949")
+        conn = pymssql.connect(host, username, password, database, charset="cp949")
         sql="select SITE_GUBUN, REVIEW_DOC_NO, ANAL_CODE, REVIEW from TB_REVIEW (nolock) where ANAL_CODE like '%ANAL%'"
         df_A=pd.read_sql(sql,conn)
         col_nameA=["SITE_GUBUN","REVIEW_DOC_NO","ANAL_CODE","REVIEW"]
@@ -115,7 +122,7 @@ def TB_REVIEW_join():
 def site_gubun_list():
     '''REVIEW_TABLE에 등록된 site_gubun list'''
     try:
-        conn = pymssql.connect(server, username, password, database, charset="cp949")
+        conn = pymssql.connect(host, username, password, database, charset="cp949")
         cursor = conn.cursor()
         sql = "select distinct SITE_GUBUN from TB_REVIEW (nolock)"
         cursor.execute(sql)
@@ -130,7 +137,7 @@ def site_gubun_list():
 # TB_anal_00 column
 def TB_anal_00_insert(df):
     try:
-        conn = pymssql.connect(server, username, password, database, charset="utf8")
+        conn = pymssql.connect(host, username, password, database, charset="utf8")
         for i, row in df.iterrows():
             cursor=conn.cursor()
             sql="exec dbo.P_MNG_ANA000 @section='SA', @review_doc_no=%s, @anal_code=%s, @rlt_value_01=%s, @rlt_value_02=%s, @rlt_value_03=%s"
@@ -145,11 +152,13 @@ def TB_anal_00_insert(df):
 
 
 def TB_anal_01_insert():
+    '''procesure execute'''
     try:
-        conn = pymssql.connect(server, username, password, database, charset="cp949")
+        conn = pymssql.connect(host, username, password, database, charset="cp949")
         cursor=conn.cursor()
         sql="exec dbo.P_MNG_ANA001 @section = 'SB'"
         cursor.execute(sql)
+        conn.commit()
         print("anal_01 완료")
     except Exception as e:
         print(e)
@@ -158,7 +167,7 @@ def TB_anal_01_insert():
 
 def TB_anal_02_insert(df):
     try:
-        conn = pymssql.connect(server, username, password, database, charset="utf8")
+        conn = pymssql.connect(host, username, password, database, charset="utf8")
         for i, row in df.iterrows():
             cursor = conn.cursor()
         
@@ -192,7 +201,7 @@ def TB_anal_02_insert(df):
 
 def TB_anal_03_insert(df):
     try:
-        conn = pymssql.connect(server, username, password, database, charset="utf8")
+        conn = pymssql.connect(host, username, password, database, charset="utf8")
         for i, row in df.iterrows():
             cursor = conn.cursor()
             
@@ -219,7 +228,6 @@ def TB_anal_03_insert(df):
         conn.close()
     print('anal03 DB 저장 끝')
 
-
 def last_isrt_dttm():
     with open('./etc/last_isrt_dttm.txt','r',encoding='utf8') as f:
         lines=f.readlines()
@@ -243,3 +251,108 @@ def time_txt(content_list,file_path):
         for line in content_list:
             f.write(f'{line}\t')
         f.write("\n")
+
+
+### send mail infomation
+sendEmail="asclhg@naver.com"
+recvEmail="seojeong@asc.kr"
+password="llhhgg0119@"
+
+smtpName="smtp.naver.com"
+smtpPort=587
+session=None
+today=datetime.now().strftime('%Y%m%d')
+
+def success_sendEmail():
+    try:
+        path=today_path()
+        # SMTP 세션 생성
+        session=smtplib.SMTP(smtpName,smtpPort)
+        session.set_debuglevel(False)
+        
+        # SMTP 계정 인증 설정
+        session.ehlo()
+        session.starttls()
+        session.login(sendEmail,password)
+
+        # 메일컨텐츠 설정
+        message=MIMEMultipart("mixed")
+        
+        # 메일 송/수신 옵션 설정
+        message.set_charset('utf-8')
+        
+        content_path=os.path.join(path,'분석시간체크.txt')
+        if not os.path.exists(content_path):
+            with open(content_path,'r',encoding='utf8') as f:
+                text=f.read()
+        else:
+            text=f'{today} 분석완료'
+        
+        message['From']=sendEmail
+        message['To']=recvEmail
+        message['Subject']=f"[리뷰분석완료]{today} Lipaco 분석완료"
+        message.attach(MIMEText(text))
+
+        # 메일 첨부파일
+        attachments=os.listdir(today_path) # file_list: 폴더 내 파일 리스트
+        
+        work_dir=os.getcwd()
+        isrt_dttm_path=os.path.join(work_dir,'etc','last_isrt_dttm.txt')
+        #isrt_attach=open(isrt_dttm_path,'rb')
+        part=MIMEBase('application','octet-stream')
+        part.set_payload(open(isrt_dttm_path,'rb').read())
+        encoders.encode_base64(part)
+        part.add_header("Content-Disposition", 'attachment',filename=os.path.basename(isrt_dttm_path))
+        message.attach(part)
+        
+
+
+        if len(attachments) > 0:
+            for attachment in attachments:
+                file_path=os.path.join(today_path,attachment)
+                attach_binary=MIMEBase("application","octet-stream")
+                try:
+                    attach_file=open(file_path,"rb").read() #open the file
+                    attach_binary.set_payload(attach_file)
+                    encoders.encode_base64(attach_binary)
+
+                    # 파일이름 지정된 report header추가
+                    attach_binary.add_header("Content-Disposition", 'attachment',filename=attachment)
+                    message.attach(attach_binary)
+                except Exception as e:
+                    print(e)
+
+        # 메일 발송
+        session.sendmail(sendEmail,recvEmail,message.as_string())
+        print("successfully sent the mail")
+
+    except Exception as e:
+        print(e)
+    finally:
+        if session is not None:
+            session.quit()
+
+
+def fail_sendEmail(err):
+    msg=MIMEText(err)
+    msg['Subject']=f"[리뷰분석오류]{today} 리파코 분석 오류"
+    msg['From']=sendEmail
+    msg['To']=recvEmail
+    print(msg.as_string())
+
+    s=smtplib.SMTP(smtpName,smtpPort)
+    s.starttls()
+    s.login(sendEmail,password)
+    s.sendmail(sendEmail,recvEmail,msg.as_string())
+    s.close()
+    print("successfully sent the mail")
+
+
+def today_path():
+    '''backup folder create'''
+    #folder_path=os.getcwd()+'/etc/result_data'
+    folder_path=os.getcwd()+'\\etc\\result_data'
+    today_path=os.path.join(folder_path,today)
+    if not os.path.exists(today_path):
+        os.mkdir(today_path)
+    return today_path

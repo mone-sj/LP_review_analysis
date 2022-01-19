@@ -1,5 +1,5 @@
 #-*- coding: utf-8 -*-
-import requests, os, time
+import requests, time
 from datetime import datetime
 from classification import predict
 from DB_conn import db
@@ -7,13 +7,7 @@ from DB_conn import db
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# backup folder create
-today=datetime.now().strftime('%Y%m%d')
-#folder_path=os.getcwd()+'/etc/result_data'
-folder_path=os.getcwd()+'\\etc\\result_data'
-today_path=os.path.join(folder_path,today)
-if not os.path.exists(today_path):
-    os.mkdir(today_path)
+today_path=db.today_path()
 
 time_list=[]
 error_list=[]
@@ -34,9 +28,14 @@ score_1 = ['외로움', '후회', '실망', '두려움', '싫음', '미워함', 
 
 # 감정분류, 속성분류
 def api(df): # api
+    print('property+empathy_analysis')
+    print(f"anal00 분석리뷰수: {len(df)}")
+    now=datetime.now().strftime('%y%m%d_%H%M')
+    df.to_csv(f'{today_path}\\{now}_TB_review_data.csv', index=None)
+    
     start_time=time.time()
     result_df=df.copy()
-    #result_df= result_df[0:5]
+
     # 감정,감정점수,분류 결과 컬럼 추가
     result_df['EMPATHY']=''
     result_df['EMPATHY_SCORE']=''
@@ -86,7 +85,7 @@ def api(df): # api
     
     data=result_df[['REVIEW_DOC_NO','ANAL_CODE','CLASSIFY','EMPATHY','EMPATHY_SCORE']]
 
-    df_anal=data.drop_duplicate(['ANAL_CODE'])
+    df_anal=data.drop_duplicates(['ANAL_CODE'])
     anal_list=df_anal['ANAL_CODE'].tolist()
 
     end_time=time.time()
@@ -104,6 +103,10 @@ def api(df): # api
 
 def model_pt(df):
     print('property+empathy_analysis')
+    print(f"anal00 분석리뷰수: {len(df)}")
+    now=datetime.now().strftime('%y%m%d_%H%M')
+    df.to_csv(f'{today_path}\\{now}_TB_review_data.csv', index=None)
+
     start_time=time.time()
     result_df=df.copy()
 
@@ -148,7 +151,7 @@ def model_pt(df):
     
     data=result_df[['REVIEW_DOC_NO','ANAL_CODE','CLASSIFY','EMPATHY','EMPATHY_SCORE']]
 
-    df_anal=data.drop_duplicate(['ANAL_CODE'])
+    df_anal=data.drop_duplicates(['ANAL_CODE'])
     anal_list=df_anal['ANAL_CODE'].tolist()
 
     end_time=time.time()
