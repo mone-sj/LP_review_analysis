@@ -1,17 +1,16 @@
 #-*- coding: utf-8 -*-
 import pandas as pd
 import numpy as np
-import pymssql, os, smtplib, traceback
+import pymssql, os, smtplib, traceback, time
 from datetime import datetime
 from email.mime.text import MIMEText
 from email import encoders
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 
-server = 'ASC-AI.iptime.org'
 host = 'ASC-AI.iptime.org'
 database = 'living_paradise'
-username = 'living_paradise '
+username = 'living_paradise'
 password = 'asc1234pw!'
 
 # DB 연결
@@ -32,7 +31,6 @@ def select_conn():
     return conn
 
 '''DB select'''
-
 def TB_REIVEW_qb():
     '''TB_REVIEW all select func.(cp949)'''
     try:
@@ -83,9 +81,8 @@ def TB_UNUSE_KEYWORD():
 
 def ANAL00_AanlCode():
     '''TB_ANAL00에 등록된 anal_code list'''
+    conn = pymssql.connect(host, username, password, database, charset="cp949")
     try:
-        conn1=pymssql.connect()
-        conn = pymssql.connect(host, username, password, database, charset="cp949")
         cursor = conn.cursor()
         sql = "select distinct ANAL_CODE from TB_REVIEW_ANAL_00"
         cursor.execute(sql)
@@ -176,19 +173,19 @@ def TB_anal_02_insert(df):
             #     if type(row[col]) is np.float:
             #         row[col] = ''
 
-            if type(row[4]) is np.float:
-                print('null')
-                continue
-            elif row[4]=='오류':
+            # if type(row[4]) is np.float:
+            #     print('null')
+            #     continue
+            if row[4]=='오류' or row[4]=='': 
                 continue
             else:
-                if row[1] == 0:  # 키워드
+                if row[1] == '0':  # 키워드 / csv 파일은 0을 숫자로 인식, 분석결과의 DF는 0을 문자로 인식
                     sql = "exec dbo.P_MNG_ANA002 @section = 'SA', @anal_code=%s,@keyword_gubun=%s,@keyword_positive=%s,@site_gubun=%s, @rlt_value_01=%s, @rlt_value_02=%s,@rlt_value_03=%s,@rlt_value_04=%s,@rlt_value_05=%s,@rlt_value_06=%s,@rlt_value_07=%s,@rlt_value_08=%s,@rlt_value_09=%s,@rlt_value_10=%s"
                     cursor.execute(sql, tuple(row))
                     print("Record inserted")
                     conn.commit()
 
-                elif row[1] == 1:  # 핵심문장
+                elif row[1] == '1':  # 핵심문장
                     sql = "exec dbo.P_MNG_ANA002 @section = 'SA', @anal_code=%s,@keyword_gubun=%s,@keyword_positive=%s,@site_gubun=%s, @rlt_value_01=%s, @rlt_value_02=%s,@rlt_value_03=%s,@rlt_value_04=%s,@rlt_value_05=%s"
                     cursor.execute(sql, tuple(row))
                     print("Record inserted")
@@ -205,19 +202,19 @@ def TB_anal_03_insert(df):
         for i, row in df.iterrows():
             cursor = conn.cursor()
             
-            if type(row[3]) is np.float:
-                print('null')
-                continue
-            elif row[3]=='오류':
+            # if type(row[3]) is np.float:
+            #     print(f'{i}번째 행 type(row[3]) np.float라서 continue null')
+            #     continue
+            if row[3]=='오류' or row[3]=='':
                 continue
             else:
-                if row[1] == 0:  # 키워드
-                    sql = "exec dbo.P_MNG_ANA003 @section = 'SA', @anal_code=%s,@keyword_gubun=%s@site_gubun=%s, @rlt_value_01=%s, @rlt_value_02=%s,@rlt_value_03=%s,@rlt_value_04=%s,@rlt_value_05=%s,@rlt_value_06=%s,@rlt_value_07=%s,@rlt_value_08=%s,@rlt_value_09=%s,@rlt_value_10=%s"
+                if row[1] == '0':  # 키워드
+                    sql = "exec dbo.P_MNG_ANA003 @section = 'SA', @anal_code=%s,@keyword_gubun=%s,@site_gubun=%s, @rlt_value_01=%s, @rlt_value_02=%s,@rlt_value_03=%s,@rlt_value_04=%s,@rlt_value_05=%s,@rlt_value_06=%s,@rlt_value_07=%s,@rlt_value_08=%s,@rlt_value_09=%s,@rlt_value_10=%s"
                     cursor.execute(sql, tuple(row))
                     print("Record inserted")
                     conn.commit()
 
-                elif row[1] == 1:  # 핵심문장
+                elif row[1] == '1':  # 핵심문장
                     sql = "exec dbo.P_MNG_ANA003 @section = 'SA', @anal_code=%s,@keyword_gubun=%s,@site_gubun=%s, @rlt_value_01=%s, @rlt_value_02=%s,@rlt_value_03=%s,@rlt_value_04=%s,@rlt_value_05=%s"
                     cursor.execute(sql, tuple(row))
                     print("Record inserted")
@@ -252,11 +249,10 @@ def time_txt(content_list,file_path):
             f.write(f'{line}\t')
         f.write("\n")
 
-
 ### send mail infomation
 sendEmail="asclhg@naver.com"
 recvEmail="seojeong@asc.kr"
-password="llhhgg0119@"
+mail_pw="llhhgg0119@"
 
 smtpName="smtp.naver.com"
 smtpPort=587
@@ -273,7 +269,7 @@ def success_sendEmail():
         # SMTP 계정 인증 설정
         session.ehlo()
         session.starttls()
-        session.login(sendEmail,password)
+        session.login(sendEmail,mail_pw)
 
         # 메일컨텐츠 설정
         message=MIMEMultipart("mixed")
@@ -283,18 +279,18 @@ def success_sendEmail():
         
         content_path=os.path.join(path,'분석시간체크.txt')
         if not os.path.exists(content_path):
+            text=f'{today} 분석완료'
+        else:
             with open(content_path,'r',encoding='utf8') as f:
                 text=f.read()
-        else:
-            text=f'{today} 분석완료'
         
         message['From']=sendEmail
         message['To']=recvEmail
         message['Subject']=f"[리뷰분석완료]{today} Lipaco 분석완료"
         message.attach(MIMEText(text))
-
+        
         # 메일 첨부파일
-        attachments=os.listdir(today_path) # file_list: 폴더 내 파일 리스트
+        attachments=os.listdir(path) # file_list: 폴더 내 파일 리스트
         
         work_dir=os.getcwd()
         isrt_dttm_path=os.path.join(work_dir,'etc','last_isrt_dttm.txt')
@@ -304,18 +300,16 @@ def success_sendEmail():
         encoders.encode_base64(part)
         part.add_header("Content-Disposition", 'attachment',filename=os.path.basename(isrt_dttm_path))
         message.attach(part)
-        
-
 
         if len(attachments) > 0:
             for attachment in attachments:
-                file_path=os.path.join(today_path,attachment)
+                file_path=os.path.join(path,attachment)
                 attach_binary=MIMEBase("application","octet-stream")
                 try:
                     attach_file=open(file_path,"rb").read() #open the file
                     attach_binary.set_payload(attach_file)
                     encoders.encode_base64(attach_binary)
-
+                    
                     # 파일이름 지정된 report header추가
                     attach_binary.add_header("Content-Disposition", 'attachment',filename=attachment)
                     message.attach(attach_binary)
@@ -342,7 +336,7 @@ def fail_sendEmail(err):
 
     s=smtplib.SMTP(smtpName,smtpPort)
     s.starttls()
-    s.login(sendEmail,password)
+    s.login(sendEmail,mail_pw)
     s.sendmail(sendEmail,recvEmail,msg.as_string())
     s.close()
     print("successfully sent the mail")

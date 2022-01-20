@@ -43,8 +43,8 @@ def total(code_list):
                 df_site['REVIEW'] = df_site['REVIEW'].str.replace(pat=r'[^\w\s]', repl=r' ', regex=True)
                 review_content=df_site['REVIEW'].tolist()
 
-                analy_cd=df.iloc[0,2]
-                site = df.iloc[0,0]                                 # SITE_GUBUN - 0:naver / 1:coupang
+                analy_cd=df_site.iloc[0,2]
+                site = df_site.iloc[0,0]                                 # SITE_GUBUN - 0:naver / 1:coupang
 
                 # 리뷰 5개 이하면 키워드 분석은 하지 않고, 리뷰를 최신순으로 핵심문장으로 출력
                 if 0<len(df_site)<6:
@@ -178,8 +178,8 @@ def emo(code_list):
             if len(df_site)==0:
                 none_review.append(f'{code}\tsite_gubun:{site_no}\temo_전체_review_없음')
             else:
-                analy_cd=df.iloc[0,2]
-                site = df.iloc[0,0]  #사이트 구분 0:네이버/1:쿠팡
+                analy_cd=df_site.iloc[0,2]
+                site = df_site.iloc[0,0]  #사이트 구분 0:네이버/1:쿠팡
                 # keywords = '0' / sentences ='1' // neg='N' / pos='P'
 
                 # 긍정 키워드

@@ -1,5 +1,17 @@
 #-*- coding:utf-8 -*-
+from DB_conn import db
+from datetime import datetime
+import pandas as pd
+import keysentence
 
+#anal3=pd.read_csv('./etc/result_data/20220120/220120_1009_anal03_result_test.csv')
+
+list1=['ANAL-211104-0001']
+anal3 = keysentence.total(list1)
+#anal2=keysentence.emo(list1)
+
+
+'''
 
 from DB_conn import db
 import classify_empathy
@@ -34,3 +46,4 @@ except Exception as e:
     print(e)
 finally:
     insert_conn.close()
+'''

@@ -1670,3 +1670,859 @@ Traceback (most recent call last):
     conn.close()
 UnboundLocalError: local variable 'conn' referenced before assignment
 
+20220119 19:23
+Traceback (most recent call last):
+  File "src\pymssql\_pymssql.pyx", line 646, in pymssql._pymssql.connect
+  File "src\pymssql\_mssql.pyx", line 2126, in pymssql._mssql.connect
+  File "src\pymssql\_mssql.pyx", line 716, in pymssql._mssql.MSSQLConnection.__init__
+  File "src\pymssql\_mssql.pyx", line 1835, in pymssql._mssql.maybe_raise_MSSQLDatabaseException
+  File "src\pymssql\_mssql.pyx", line 1852, in pymssql._mssql.raise_MSSQLDatabaseException
+pymssql._mssql.MSSQLDatabaseException: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "exe.py", line 48, in <module>
+    analysis()
+  File "exe.py", line 26, in analysis
+    anal00_anal_code_list=db.ANAL00_AanlCode() # 키워드 키센텐스 실행을 위한 code_list
+  File "D:\workspace\cb_nlp\LP_review_analysis\DB_conn\db.py", line 86, in ANAL00_AanlCode
+    conn = pymssql.connect(host, username, password, database, charset="cp949")
+  File "src\pymssql\_pymssql.pyx", line 652, in pymssql._pymssql.connect
+pymssql._pymssql.OperationalError: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+20220119 19:32
+Traceback (most recent call last):
+  File "src\pymssql\_pymssql.pyx", line 646, in pymssql._pymssql.connect
+  File "src\pymssql\_mssql.pyx", line 2126, in pymssql._mssql.connect
+  File "src\pymssql\_mssql.pyx", line 716, in pymssql._mssql.MSSQLConnection.__init__
+  File "src\pymssql\_mssql.pyx", line 1835, in pymssql._mssql.maybe_raise_MSSQLDatabaseException
+  File "src\pymssql\_mssql.pyx", line 1852, in pymssql._mssql.raise_MSSQLDatabaseException
+pymssql._mssql.MSSQLDatabaseException: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "exe.py", line 48, in <module>
+    analysis()
+  File "exe.py", line 26, in analysis
+    anal00_anal_code_list=db.ANAL00_AanlCode() # 키워드 키센텐스 실행을 위한 code_list
+  File "D:\workspace\cb_nlp\LP_review_analysis\DB_conn\db.py", line 87, in ANAL00_AanlCode
+    conn = pymssql.connect(host, username, password, database, charset="cp949")
+  File "src\pymssql\_pymssql.pyx", line 652, in pymssql._pymssql.connect
+pymssql._pymssql.OperationalError: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+20220119 19:33
+Traceback (most recent call last):
+  File "src\pymssql\_pymssql.pyx", line 646, in pymssql._pymssql.connect
+  File "src\pymssql\_mssql.pyx", line 2126, in pymssql._mssql.connect
+  File "src\pymssql\_mssql.pyx", line 716, in pymssql._mssql.MSSQLConnection.__init__
+  File "src\pymssql\_mssql.pyx", line 1835, in pymssql._mssql.maybe_raise_MSSQLDatabaseException
+  File "src\pymssql\_mssql.pyx", line 1852, in pymssql._mssql.raise_MSSQLDatabaseException
+pymssql._mssql.MSSQLDatabaseException: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "exe.py", line 47, in <module>
+    analysis()
+  File "exe.py", line 25, in analysis
+    anal00_anal_code_list=db.ANAL00_AanlCode() # 키워드 키센텐스 실행을 위한 code_list
+  File "D:\workspace\cb_nlp\LP_review_analysis\DB_conn\db.py", line 88, in ANAL00_AanlCode
+    conn = pymssql.connect(host, username, password, database, charset="cp949")
+  File "src\pymssql\_pymssql.pyx", line 652, in pymssql._pymssql.connect
+pymssql._pymssql.OperationalError: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+20220119 19:35
+Traceback (most recent call last):
+  File "exe.py", line 47, in <module>
+    analysis()
+  File "exe.py", line 14, in analysis
+    df,isrt_dttm=db.TB_REIVEW_qa(from_date,to_date)
+  File "D:\workspace\cb_nlp\LP_review_analysis\DB_conn\db.py", line 67, in TB_REIVEW_qa
+    conn.close()
+UnboundLocalError: local variable 'conn' referenced before assignment
+
+20220119 19:37
+Traceback (most recent call last):
+  File "exe.py", line 47, in <module>
+    analysis()
+  File "exe.py", line 14, in analysis
+    df,isrt_dttm=db.TB_REIVEW_qa(from_date,to_date)
+  File "D:\workspace\cb_nlp\LP_review_analysis\DB_conn\db.py", line 67, in TB_REIVEW_qa
+    conn.close()
+UnboundLocalError: local variable 'conn' referenced before assignment
+
+20220119 19:39
+Traceback (most recent call last):
+  File "src\pymssql\_pymssql.pyx", line 646, in pymssql._pymssql.connect
+  File "src\pymssql\_mssql.pyx", line 2126, in pymssql._mssql.connect
+  File "src\pymssql\_mssql.pyx", line 716, in pymssql._mssql.MSSQLConnection.__init__
+  File "src\pymssql\_mssql.pyx", line 1835, in pymssql._mssql.maybe_raise_MSSQLDatabaseException
+  File "src\pymssql\_mssql.pyx", line 1852, in pymssql._mssql.raise_MSSQLDatabaseException
+pymssql._mssql.MSSQLDatabaseException: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "exe.py", line 47, in <module>
+    analysis()
+  File "exe.py", line 27, in analysis
+    anal2 = keysentence.emo(anal00_anal_code_list)
+  File "D:\workspace\cb_nlp\LP_review_analysis\keysentence.py", line 158, in emo
+    site_gubun=db.site_gubun_list()     # load crawling site code
+  File "D:\workspace\cb_nlp\LP_review_analysis\DB_conn\db.py", line 130, in site_gubun_list
+    conn = pymssql.connect(host, username, password, database, charset="cp949")
+  File "src\pymssql\_pymssql.pyx", line 652, in pymssql._pymssql.connect
+pymssql._pymssql.OperationalError: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+20220119 19:40
+Traceback (most recent call last):
+  File "src\pymssql\_pymssql.pyx", line 646, in pymssql._pymssql.connect
+  File "src\pymssql\_mssql.pyx", line 2126, in pymssql._mssql.connect
+  File "src\pymssql\_mssql.pyx", line 716, in pymssql._mssql.MSSQLConnection.__init__
+  File "src\pymssql\_mssql.pyx", line 1835, in pymssql._mssql.maybe_raise_MSSQLDatabaseException
+  File "src\pymssql\_mssql.pyx", line 1852, in pymssql._mssql.raise_MSSQLDatabaseException
+pymssql._mssql.MSSQLDatabaseException: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "exe.py", line 47, in <module>
+    analysis()
+  File "exe.py", line 27, in analysis
+    anal2 = keysentence.emo(anal00_anal_code_list)
+  File "D:\workspace\cb_nlp\LP_review_analysis\keysentence.py", line 158, in emo
+    site_gubun=db.site_gubun_list()     # load crawling site code
+  File "D:\workspace\cb_nlp\LP_review_analysis\DB_conn\db.py", line 134, in site_gubun_list
+    conn = pymssql.connect(host, username, password, database, charset="cp949")
+  File "src\pymssql\_pymssql.pyx", line 652, in pymssql._pymssql.connect
+pymssql._pymssql.OperationalError: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+20220119 19:41
+Traceback (most recent call last):
+  File "src\pymssql\_pymssql.pyx", line 646, in pymssql._pymssql.connect
+  File "src\pymssql\_mssql.pyx", line 2126, in pymssql._mssql.connect
+  File "src\pymssql\_mssql.pyx", line 716, in pymssql._mssql.MSSQLConnection.__init__
+  File "src\pymssql\_mssql.pyx", line 1835, in pymssql._mssql.maybe_raise_MSSQLDatabaseException
+  File "src\pymssql\_mssql.pyx", line 1852, in pymssql._mssql.raise_MSSQLDatabaseException
+pymssql._mssql.MSSQLDatabaseException: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "exe.py", line 47, in <module>
+    analysis()
+  File "exe.py", line 25, in analysis
+    anal00_anal_code_list=db.ANAL00_AanlCode() # 키워드 키센텐스 실행을 위한 code_list
+  File "D:\workspace\cb_nlp\LP_review_analysis\DB_conn\db.py", line 87, in ANAL00_AanlCode
+    conn = pymssql.connect(host, username, password, database, charset="cp949")
+  File "src\pymssql\_pymssql.pyx", line 652, in pymssql._pymssql.connect
+pymssql._pymssql.OperationalError: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+20220119 19:43
+Traceback (most recent call last):
+  File "src\pymssql\_pymssql.pyx", line 646, in pymssql._pymssql.connect
+  File "src\pymssql\_mssql.pyx", line 2126, in pymssql._mssql.connect
+  File "src\pymssql\_mssql.pyx", line 716, in pymssql._mssql.MSSQLConnection.__init__
+  File "src\pymssql\_mssql.pyx", line 1835, in pymssql._mssql.maybe_raise_MSSQLDatabaseException
+  File "src\pymssql\_mssql.pyx", line 1852, in pymssql._mssql.raise_MSSQLDatabaseException
+pymssql._mssql.MSSQLDatabaseException: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "exe.py", line 47, in <module>
+    analysis()
+  File "exe.py", line 27, in analysis
+    anal2 = keysentence.emo(anal00_anal_code_list)
+  File "D:\workspace\cb_nlp\LP_review_analysis\keysentence.py", line 158, in emo
+    site_gubun=db.site_gubun_list()     # load crawling site code
+  File "D:\workspace\cb_nlp\LP_review_analysis\DB_conn\db.py", line 136, in site_gubun_list
+    conn = pymssql.connect(host, username, password, database, charset="cp949")
+  File "src\pymssql\_pymssql.pyx", line 652, in pymssql._pymssql.connect
+pymssql._pymssql.OperationalError: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+20220119 19:44
+Traceback (most recent call last):
+  File "exe.py", line 48, in <module>
+    analysis()
+  File "exe.py", line 28, in analysis
+    anal2 = keysentence.emo(anal00_anal_code_list)
+  File "D:\workspace\cb_nlp\LP_review_analysis\keysentence.py", line 170, in emo
+    stopword=db.TB_UNUSE_KEYWORD()
+  File "D:\workspace\cb_nlp\LP_review_analysis\DB_conn\db.py", line 80, in TB_UNUSE_KEYWORD
+    conn.close()
+UnboundLocalError: local variable 'conn' referenced before assignment
+
+20220119 19:47
+Traceback (most recent call last):
+  File "src\pymssql\_pymssql.pyx", line 646, in pymssql._pymssql.connect
+  File "src\pymssql\_mssql.pyx", line 2126, in pymssql._mssql.connect
+  File "src\pymssql\_mssql.pyx", line 716, in pymssql._mssql.MSSQLConnection.__init__
+  File "src\pymssql\_mssql.pyx", line 1835, in pymssql._mssql.maybe_raise_MSSQLDatabaseException
+  File "src\pymssql\_mssql.pyx", line 1852, in pymssql._mssql.raise_MSSQLDatabaseException
+pymssql._mssql.MSSQLDatabaseException: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "exe.py", line 48, in <module>
+    analysis()
+  File "exe.py", line 25, in analysis
+    anal00_anal_code_list=db.ANAL00_AanlCode() # 키워드 키센텐스 실행을 위한 code_list
+  File "D:\workspace\cb_nlp\LP_review_analysis\DB_conn\db.py", line 92, in ANAL00_AanlCode
+    conn = pymssql.connect(host, username, password, database, charset="cp949")
+  File "src\pymssql\_pymssql.pyx", line 652, in pymssql._pymssql.connect
+pymssql._pymssql.OperationalError: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (ASC-AI.iptime.org)\n')
+
+ANAL-211104-0025 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0025 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0225 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0031 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0031 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0039 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0024 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0178 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0178_부정리뷰 없음
+ANAL-211104-0160 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0160 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0006 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0006 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0006 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0237 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0237 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0071 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0071 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0071_부정리뷰 없음
+ANAL-211104-0030 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0030 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0030_부정리뷰 없음
+ANAL-211104-0092 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0092 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0092 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0140 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0140_부정리뷰 없음
+ANAL-211104-0022 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0022 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0022 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0022 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0086 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0086 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0138 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0138 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0138 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0138 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0010 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0010 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0010 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0010 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0195 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0195_부정리뷰 없음
+ANAL-211104-0268 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0268 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0268 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0155 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0155 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0155 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0155 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0076 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0076 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0076 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0100 site:1 긍정리뷰 없음
+ANAL-211104-0122 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0122 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0122 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0055 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0055 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0055 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0055 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0094 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0094_부정리뷰 없음
+ANAL-211104-0255 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0054 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0054 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0054 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0054 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0009 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0009 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0009 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0009 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0120 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0065 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0065 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0265 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0265 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0265 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0265 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0300 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0300 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0300 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0300 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0036 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0036 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0036 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0036 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0126 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0126 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0126 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0045 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0045 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0045 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0310 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0310 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0019 site:1 긍정리뷰 없음
+ANAL-211104-0019_부정리뷰 없음
+ANAL-211104-0052 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0052 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0052 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0052 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0079 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0079 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0079 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0016 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0016 site:0 긍정리뷰 없음
+ANAL-211104-0016_부정리뷰 없음
+ANAL-211104-0228 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0228 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0228 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0221 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0221_부정리뷰 없음
+ANAL-211104-0125 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0125 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0277 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0277 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0272 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0272 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0272 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0272 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0180 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0180 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0118 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0118 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0192 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0192 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0192 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0192 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0095 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0070 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0152 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0152 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0152 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0152 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0060 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0060 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0270 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0270 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0270 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0270 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0190 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0190 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0190_부정리뷰 없음
+ANAL-211104-0113 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0081 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0081 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0081 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0040 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0150 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0150 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0275 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0275 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0275 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0275 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0137 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0137 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0137 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0137 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0187 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0187_부정리뷰 없음
+ANAL-211104-0089 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0089 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0089 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0089 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0027 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0027 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0029 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0033 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0033_부정리뷰 없음
+ANAL-211104-0033 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0033 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0067 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0067 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0067 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0067 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0212 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0212 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0069 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0069 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0069 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0069 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0235 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0235 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0235 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0041 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0041 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0041 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0041 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0167 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0167_부정리뷰 없음
+ANAL-211104-0167_부정리뷰 없음
+ANAL-211104-0049 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0049 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0049 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0049 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0090 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0296_부정리뷰 없음
+ANAL-211104-0050 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0050 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0050 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0050 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0285 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0285 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0147 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0147 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0147 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0147 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0256 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0256 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0103 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0103 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0103 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0293 site:1 긍정리뷰 없음
+ANAL-211104-0293_부정리뷰 없음
+ANAL-211104-0262 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0084 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0084 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0084 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0084 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0073 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0073 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0001 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0001 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0001 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0001 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0307 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0159 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0159 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0159 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0159 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0011 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0011 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0011 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0011 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0107 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0107 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0064 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0064 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0208 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0208_부정리뷰 없음
+ANAL-211104-0117 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0117 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0117 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0117 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0097 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0202_부정리뷰 없음
+ANAL-211104-0044 site:1 긍정리뷰 없음
+ANAL-211104-0057 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0057 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0282 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0282 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0278 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0013 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0013 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0013 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0205 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0205_부정리뷰 없음
+ANAL-211104-0004 site:1 긍정리뷰 없음
+ANAL-211104-0004 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0004 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0210 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0020_부정리뷰 없음
+ANAL-211104-0020 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0020 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0215 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0223 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0223 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0014 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0014_부정리뷰 없음
+ANAL-211104-0014 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0172_부정리뷰 없음
+ANAL-211104-0131_부정리뷰 없음
+ANAL-211104-0129 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0129 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0129 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0129 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0246 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0234 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0234 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0234 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0088 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0088 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0088 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0074 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0074 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0074 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0074 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0181 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0181_부정리뷰 없음
+ANAL-211104-0087 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0087 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0087 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0087 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0114_부정리뷰 없음
+ANAL-211104-0303 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0263 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0263 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0153 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0153 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0309 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0309 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0028 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0028_부정리뷰 없음
+ANAL-211104-0028 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0313 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0313_부정리뷰 없음
+ANAL-211104-0209 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0163 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0163 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0163 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0021_부정리뷰 없음
+ANAL-211104-0171 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0077 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0077 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0077 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0077 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0157 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0157 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0048 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0048 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0048 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0048 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0072 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0072 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0072_부정리뷰 없음
+ANAL-211104-0047 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0047 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0047 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0047 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0083 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0083 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0083 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0083 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0292_부정리뷰 없음
+ANAL-211104-0203 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0203_부정리뷰 없음
+ANAL-211104-0280 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0280 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0280 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0280 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0297 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0213 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0279 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0279 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0279 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0279 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0220 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0189 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0189_부정리뷰 없음
+ANAL-211104-0023 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0023 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0023 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0023 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0037_부정리뷰 없음
+ANAL-211104-0104_부정리뷰 없음
+ANAL-211104-0007 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0007 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0007 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0183 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0183 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0183 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0183 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0101 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0101 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0101 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0101 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0184 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0184 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0063 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0063 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0204_부정리뷰 없음
+ANAL-211104-0204_부정리뷰 없음
+ANAL-211104-0311 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0111 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0111 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0111 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0123 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0123_부정리뷰 없음
+ANAL-211104-0240_부정리뷰 없음
+ANAL-211104-0043 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0043 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0043 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0043 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0017 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0017 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0017 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0017 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0058 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0058 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0058 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0058 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0169 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0169_부정리뷰 없음
+ANAL-211104-0091 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0091 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0214 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0214 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0214 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0149 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0149 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0149 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0149 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0099 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0099 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0176_부정리뷰 없음
+ANAL-211104-0051 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0051 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0051 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0051 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0174 site:0 긍정리뷰 없음
+ANAL-211104-0174_부정리뷰 없음
+ANAL-211104-0068 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0059 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0197_부정리뷰 없음
+ANAL-211104-0289 site:1 긍정리뷰 없음
+ANAL-211104-0289_부정리뷰 없음
+ANAL-211104-0143 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0143 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0143 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0127 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0127 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0219 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0219_부정리뷰 없음
+ANAL-211104-0233 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0233 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0233 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0233 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0283 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0283 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0222 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0222_부정리뷰 없음
+ANAL-211104-0222_부정리뷰 없음
+ANAL-211104-0226 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0226 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0175_부정리뷰 없음
+ANAL-211104-0198_부정리뷰 없음
+ANAL-211104-0198_부정리뷰 없음
+ANAL-211104-0301 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0301 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0301 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0301 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0128 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0128 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0128 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0128 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0165_부정리뷰 없음
+ANAL-211104-0165_부정리뷰 없음
+ANAL-211104-0075 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0075 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0075 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0075 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0247 site:1 긍정리뷰 없음
+ANAL-211104-0193 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0193_부정리뷰 없음
+ANAL-211104-0116 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0116 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0116 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0116 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0145 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0145 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0145 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0194 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0194 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0194_부정리뷰 없음
+ANAL-211104-0002 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0002 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0002 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0179 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0179_부정리뷰 없음
+ANAL-211104-0179 site:1 긍정리뷰 없음
+ANAL-211104-0179_부정리뷰 없음
+ANAL-211104-0154 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0154 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0284 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0284 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0284 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0231 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0231 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0231 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0012 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0012 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0236 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0236 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0236 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0236 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0281 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0121 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0121 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0121 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0121 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0078 site:1 긍정리뷰 없음
+ANAL-211104-0314_부정리뷰 없음
+ANAL-211104-0314_부정리뷰 없음
+ANAL-211104-0164 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0164 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0224_부정리뷰 없음
+ANAL-211104-0132 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0217 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0217 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0258 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0258 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0258 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0258 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0161 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0115 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0115 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0115 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0229 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0264 site:1 긍정리뷰 없음
+ANAL-211104-0264 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0216 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0216_부정리뷰 없음
+ANAL-211104-0216_부정리뷰 없음
+ANAL-211104-0026 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0026 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0182 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0141 site:1 긍정리뷰 없음
+ANAL-211104-0141_부정리뷰 없음
+ANAL-211104-0085 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0085 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0085 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0244 site:1 긍정리뷰 없음
+ANAL-211104-0244_부정리뷰 없음
+ANAL-211104-0188 site:1 긍정리뷰 없음
+ANAL-211104-0188_부정리뷰 없음
+ANAL-211104-0188_부정리뷰 없음
+ANAL-211104-0261 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0261 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0110 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0110 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0110 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0110 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0267 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0267 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0267 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0267 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0046 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0273 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0186 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0186 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0162 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0162 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0018 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0018 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0018 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0032 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0032 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0032 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0142 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0142 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0142 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0142 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0170 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0082 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0082 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0082 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0082 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0124 site:1 긍정리뷰 없음
+ANAL-211104-0124_부정리뷰 없음
+ANAL-211104-0148 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0148 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0148 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0148 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0306 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0306_부정리뷰 없음
+ANAL-211104-0191 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0191 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0191 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0151 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0151 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0151 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0211_부정리뷰 없음
+ANAL-211104-0206 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0207_부정리뷰 없음
+ANAL-211104-0207 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0287 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0287 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0166_부정리뷰 없음
+ANAL-211104-0102 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0102 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0144 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0144 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0144 / site: 0 부정 핵심문장 오류7	에러없음
+ANAL-211104-0299 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0299 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0185 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0185 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0259 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0259 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0259 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0259 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0096 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0096 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0146 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0146 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0146 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0146 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0130 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0130 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0130 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0130 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0056 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0056 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0056 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0056 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0062 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0062 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0005 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0109 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0109 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0109 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0109 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0112 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0112 site:1 긍정리뷰 없음
+ANAL-211104-0227_부정리뷰 없음
+ANAL-211104-0227 site:1 긍정리뷰 없음
+ANAL-211104-0227_부정리뷰 없음
+ANAL-211104-0015 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0015 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0015 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0015 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0269 / site: 0 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0269_부정리뷰 없음
+ANAL-211104-0042_부정리뷰 없음
+ANAL-211104-0042 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0042 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0066 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0066 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0066 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0066 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0053 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0053 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0053 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0053 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0276 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0276 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0276 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0249 site:1 긍정리뷰 없음
+ANAL-211104-0249_부정리뷰 없음
+ANAL-211104-0008_부정리뷰 없음
+ANAL-211104-0008 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0008 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0136 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0136 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0136 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0136 / site: 1 부정 핵심문장 오류7	에러없음
+ANAL-211104-0119 / site: 1 긍정 핵심문장 에러3	에러없음
+ANAL-211104-0119_부정리뷰 없음
+ANAL-211104-0119 site:1 긍정리뷰 없음
+ANAL-211104-0119_부정리뷰 없음
