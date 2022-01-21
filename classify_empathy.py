@@ -31,7 +31,7 @@ def api(df): # api
     print('property+empathy_analysis')
     print(f"anal00 분석리뷰수: {len(df)}")
     now=datetime.now().strftime('%y%m%d_%H%M')
-    df.to_csv(f'{today_path}\\{now}_TB_review_data.csv', index=None)
+    df.to_csv(f'{today_path}/{now}_TB_review_data.csv', index=None)
     
     start_time=time.time()
     result_df=df.copy()
@@ -95,9 +95,9 @@ def api(df): # api
     time_list=[now,"empathy+classify_api",len(anal_list),len(data),exe_time]
 
     #save
-    db.time_txt(time_list,f'{today_path}\\분석시간체크')
-    db.save_txt(error_list,f'{today_path}\\에러리스트')
-    data.to_csv(f'{today_path}\\{now}_anal01_result.csv', index=None)
+    db.time_txt(time_list,f'{today_path}/time_check')
+    db.save_txt(error_list,f'{today_path}/errorList')
+    data.to_csv(f'{today_path}/{now}_anal01_result.csv', index=None)
     return data
 
 
@@ -105,7 +105,7 @@ def model_pt(df):
     print('property+empathy_analysis')
     print(f"anal00 분석리뷰수: {len(df)}")
     now=datetime.now().strftime('%y%m%d_%H%M')
-    df.to_csv(f'{today_path}\\{now}_TB_review_data.csv', index=None)
+    df.to_csv(f'{today_path}/{now}_TB_review_data.csv', index=None)
 
     start_time=time.time()
     result_df=df.copy()
@@ -161,7 +161,7 @@ def model_pt(df):
     time_list=[now,"empathy+classify_pt",len(anal_list),len(data),exe_time]
 
     #save
-    db.time_txt(time_list,f'{today_path}\\분석시간체크')
-    db.save_txt(error_list,f'{today_path}\\에러리스트')
-    data.to_csv(f'{today_path}\\{now}_anal01_result.csv', index=None)
+    db.time_txt(time_list,f'{today_path}/time_check')
+    db.save_txt(error_list,f'{today_path}/errorList')
+    data.to_csv(f'{today_path}/{now}_anal01_result.csv', index=None)
     return data

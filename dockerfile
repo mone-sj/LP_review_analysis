@@ -10,6 +10,12 @@ ENV LC_ALL ko_KR.UTF-8
 # install cron
 RUN apt-get install cron -y
 
+ADD ./cron/root /etc/cron.d/keys-cron
+ADD ./cron/entrypoint.sh /home/entrypoint.sh
+RUN touch /var/log/cron.log
+
+RUN chmod +x /home/entrypoint.sh
+RUN chmod 0644 /etc/cron.d/keys-cron && crontab /etc/cron.d/keys-cron
 
 # python3.6
 RUN apt-get install curl -y \
@@ -34,4 +40,4 @@ RUN pip install -r requirements.txt \
 
 
 SHELL [ "/bin/bash" ]
-ENTRYPOINT ["/home/test/entrypoint.sh"]
+ENTRYPOINT ["/home/entrypoint.sh"]

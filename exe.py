@@ -15,7 +15,7 @@ def analysis():
     
     #REVIEW ANALYSIS
     # # anal00=classify_empathy.api(df)                # api
-    anal00=classify_empathy.model_pt(df)            # pt
+    anal00=classify_empathy.model_pt(df)                # pt
     
     # # anal00 insert
     db.TB_anal_00_insert(anal00)
@@ -51,7 +51,7 @@ if __name__=='__main__':
         
         # 분석날짜, 분류(total/emo), 분석제품수, 총 리뷰수, 분석시간
         time_list=[datetime.now().strftime('%y%m%d'),"all_analy","-","-",all_time]
-        db.time_txt(time_list,f'{today_path}\\분석시간체크')
+        db.time_txt(time_list,f'{today_path}/time_check')
         db.success_sendEmail()
 
     except Exception:
@@ -60,6 +60,6 @@ if __name__=='__main__':
         now=datetime.now().strftime('%Y%m%d %H:%M')
         e=f'{now}\n{err}'
         error_list.append(e)
-        db.save_txt(error_list,f'{today_path}\\에러리스트')
+        db.save_txt(error_list,f'{today_path}/errorList')
         db.fail_sendEmail(e)
         #analysis()

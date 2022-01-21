@@ -148,10 +148,10 @@ def total(code_list):
     time_list=[now,"total_key",len(code_list),review_count,total_time]
     
     # save
-    db.time_txt(time_list,f'{today_path}\\분석시간체크')
-    db.save_txt(none_review,f'{today_path}\\total_리뷰없는제품')
-    db.save_txt(error_list,f'{today_path}\\에러리스트')
-    data_anal03.to_csv(f'{today_path}\\{now}_anal03_result.csv', index=None)
+    db.time_txt(time_list,f'{today_path}/time_check')
+    db.save_txt(none_review,f'{today_path}/noReviewProduct')
+    db.save_txt(error_list,f'{today_path}/errorList')
+    data_anal03.to_csv(f'{today_path}/{now}_anal03_result.csv', index=None)
     return data_anal03
 
 def emo(code_list):
@@ -394,9 +394,9 @@ def emo(code_list):
     time_list=[now, "emo",len(code_list),review_count,emo_total_time]
 
     # save
-    db.time_txt(time_list,f'{today_path}\\분석시간체크')
-    db.save_txt(none_review,f'{today_path}\\total_리뷰없는제품')
-    db.save_txt(error_list,f'{today_path}\\에러리스트')
-    data_anal02.to_csv(f'{today_path}\\{now}_anal02_result.csv', index=None)
+    db.time_txt(time_list,f'{today_path}/time_check')
+    db.save_txt(none_review,f'{today_path}/noReviewProduct')
+    db.save_txt(error_list,f'{today_path}/errorList')
+    data_anal02.to_csv(f'{today_path}/{now}_anal02_result.csv', index=None)
 
     return data_anal02
