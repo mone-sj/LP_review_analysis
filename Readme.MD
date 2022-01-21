@@ -6,6 +6,7 @@ exe.py
 
 <br><br>
 dockerfile / cron 수정 필요
+<br>
 
 생활용품 리뷰 분석 종류<br>
 1. 리뷰의 속성분류(Kobert)
