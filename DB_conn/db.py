@@ -350,3 +350,5 @@ def today_path():
     if not os.path.exists(today_path):
         os.mkdir(today_path)
     return today_path
+
+    
