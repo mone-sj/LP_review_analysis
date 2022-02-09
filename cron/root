@@ -1,7 +1,6 @@
-#!/bin/bash
 SHELL=/bin/bash
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
-
-0 15 * * * * /home/entrypoint.sh >> /var/log/cron.log 2>&1
-# UTC 기준 매일 15시에 실행(KST 시간 00:00:00), KST 시간으로 설정하였으나 컨테이너에서 실행시에는 UTC 기준으로 실행됨.
-# Empty Line
+#0 15 * * * * /home/asc/LP_review_analysis/cron/entrypoint.sh >> /var/log/cron.log 2>&1
+# */5 * * * * /home/entrypoint.sh >> /var/log/cron.log 2>&1
+0 0 * * * /home/LP_review_analysis/cron/analy.sh >> /var/log/cron.log 2>&1
+0 18 * * 0 /home/LP_review_analysis/cron/deleteLog.sh
+# empty line
