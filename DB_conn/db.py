@@ -1,7 +1,6 @@
 #-*- coding: utf-8 -*-
 import pandas as pd
-import numpy as np
-import pymssql, os, smtplib, traceback, time
+import pymssql, os, smtplib
 from datetime import datetime
 from email.mime.text import MIMEText
 from email import encoders
@@ -131,8 +130,8 @@ def site_gubun_list():
     return row
 
 ''' DB insert'''
-# TB_anal_00 column
 def TB_anal_00_insert(df):
+    '''분류(감정분석/속성분류) 결과 DB저장'''
     try:
         conn = pymssql.connect(host, username, password, database, charset="utf8")
         for i, row in df.iterrows():
@@ -163,19 +162,12 @@ def TB_anal_01_insert():
         conn.close()
 
 def TB_anal_02_insert(df):
+    '''긍/부정 핵심문장 결과 DB 저장'''
     try:
         conn = pymssql.connect(host, username, password, database, charset="utf8")
         for i, row in df.iterrows():
             cursor = conn.cursor()
-        
-            # for col in range(len(df.columns)):
-            # # float 값 체크,..
-            #     if type(row[col]) is np.float:
-            #         row[col] = ''
 
-            # if type(row[4]) is np.float:
-            #     print('null')
-            #     continue
             if row[4]=='오류' or row[4]=='': 
                 continue
             else:
@@ -197,14 +189,13 @@ def TB_anal_02_insert(df):
     print('anal02 DB 저장 끝')
 
 def TB_anal_03_insert(df):
+    '''키워드/핵심문장 결과 DB 저장'''
     try:
         conn = pymssql.connect(host, username, password, database, charset="utf8")
         for i, row in df.iterrows():
             cursor = conn.cursor()
             
-            # if type(row[3]) is np.float:
-            #     print(f'{i}번째 행 type(row[3]) np.float라서 continue null')
-            #     continue
+
             if row[3]=='오류' or row[3]=='':
                 continue
             else:
@@ -226,6 +217,7 @@ def TB_anal_03_insert(df):
     print('anal03 DB 저장 끝')
 
 def last_isrt_dttm():
+    '''최근 분석한 시간 읽기'''
     with open('./etc/last_isrt_dttm.txt','r',encoding='utf8') as f:
         lines=f.readlines()
         last_line=len(lines)-1
@@ -233,12 +225,14 @@ def last_isrt_dttm():
     return isrt_date
 
 def save_txt(content_list,file_path):
+    '''텍스트 저장'''
     file_name=f'{file_path}.txt'
     with open(file_name,'a',encoding='utf8') as f:
         for line in content_list:
             f.write(f'{line}\n')
 
 def time_txt(content_list,file_path):
+    '''분석 시간 저장'''
     file_name=f'{file_path}.txt'
     if not os.path.exists(file_name):
         with open(file_name,'a',encoding='utf8') as f:
@@ -260,6 +254,7 @@ session=None
 today=datetime.now().strftime('%Y%m%d')
 
 def success_sendEmail():
+    '''분석 완료 메일 전송'''
     try:
         path=today_path()
         # SMTP 세션 생성
@@ -294,7 +289,6 @@ def success_sendEmail():
         
         work_dir=os.getcwd()
         isrt_dttm_path=os.path.join(work_dir,'etc','last_isrt_dttm.txt')
-        #isrt_attach=open(isrt_dttm_path,'rb')
         part=MIMEBase('application','octet-stream')
         part.set_payload(open(isrt_dttm_path,'rb').read())
         encoders.encode_base64(part)
@@ -328,6 +322,7 @@ def success_sendEmail():
 
 
 def fail_sendEmail(err):
+    '''분석 오류 메일 전송'''
     msg=MIMEText(err)
     msg['Subject']=f"[리뷰분석오류]{today} 리파코 분석 오류"
     msg['From']=sendEmail
@@ -345,7 +340,7 @@ def fail_sendEmail(err):
 def today_path():
     '''backup folder create'''
     folder_path=os.getcwd()+'/etc/result_data'
-    #folder_path=os.getcwd()+'\\etc\\result_data'
+    #folder_path=os.getcwd()+'\\etc\\result_data' window 환경에서 사용
     today_path=os.path.join(folder_path,today)
     if not os.path.exists(today_path):
         os.mkdir(today_path)

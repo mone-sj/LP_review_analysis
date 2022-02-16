@@ -2,12 +2,12 @@
 exe.py
 
 <br>
-실행환경: python 3.6
+실행환경: python 3.6, pytorch <br>
+** docker image pull <br>
+$ docker pull seojeongkim/py36_torch_anal:3.3
 
-<br><br>
-dockerfile / cron 수정 필요
+
 <br>
-
 생활용품 리뷰 분석 종류<br>
 1. 리뷰의 속성분류(Kobert)
 2. 리뷰의 감정분류(bert(acryl)) - 1점~5점

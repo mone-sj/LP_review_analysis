@@ -52,7 +52,7 @@ if __name__=='__main__':
         # 분석날짜, 분류(total/emo), 분석제품수, 총 리뷰수, 분석시간
         time_list=[datetime.now().strftime('%y%m%d'),"all_analy","-","-",all_time]
         db.time_txt(time_list,f'{today_path}/time_check')
-        db.success_sendEmail()
+        db.success_sendEmail() # 메일 전송
 
     except Exception:
         err=traceback.format_exc()
@@ -61,5 +61,5 @@ if __name__=='__main__':
         e=f'{now}\n{err}'
         error_list.append(e)
         db.save_txt(error_list,f'{today_path}/errorList')
-        db.fail_sendEmail(e)
+        db.fail_sendEmail(e)  # 오류 메일 전송
         #analysis()

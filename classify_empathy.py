@@ -13,11 +13,14 @@ time_list=[]
 error_list=[]
 
 # 충북서버 LP용 감정분석 및 분류모델 URL
-#url = 'https://192.168.200.83:30001/deployment/h84b5e7b9deb74c30e55d78f38c3a10d1/'
 classify_url = 'https://192.168.200.83:30001/deployment/hd9f94c1d7eec27394bce84741124f49b/'
+# Lipaco 서버용 분류모델 URL
+Lipaco_url='http://210.91.239.89/deployment/hab4e8860edc765dda4e30d629d0e196a/'
 
 # acryl서버 내 LP용 감정분석
 empathy_url = 'https://flightbase.acryl.ai/deployment/ha43a1099d17205a660a517a62bfd5203/'
+# Lipaco 서버용 감정분석 모델 URL
+
 
 # 감정별 점수 리스트
 score_5 = ['황홀함', '행복', '기쁨', '즐거움', '홀가분함', '자신감']
@@ -28,6 +31,8 @@ score_1 = ['외로움', '후회', '실망', '두려움', '싫음', '미워함', 
 
 # 감정분류, 속성분류
 def api(df): # api
+    ''' 감정분류/속성분류 API를 이용한 분류 예측
+    '''
     print('property+empathy_analysis')
     print(f"anal00 분석리뷰수: {len(df)}")
     now=datetime.now().strftime('%y%m%d_%H%M')
@@ -45,10 +50,10 @@ def api(df): # api
         print(f'{i+1}번째 property+empathy 분석')
         review=result_df.iloc[i,3]
         try:
-            response_empathy=requests.post(empathy_url,json={'text':review},verify=True,timeout=180)
+            response_empathy=requests.post(Lipaco_url,json={'text':review},verify=True,timeout=180)
         except:
             time.sleep(2)
-            response_empathy=requests.post(empathy_url,json={'text':review},verify=True,timeout=180)
+            response_empathy=requests.post(Lipaco_url,json={'text':review},verify=True,timeout=180)
         
         result_empathy=response_empathy.json()
         output_empathy=result_empathy.get('columnchart')[0].get('output')[0]
@@ -101,7 +106,9 @@ def api(df): # api
     return data
 
 
-def model_pt(df):
+def model_pt(df): # API를 통한 결과값 출력의 실행시간을 단축하기 위해, 모델 파일을 사용
+    ''' 감정분류API, 속성분류 모델파일(classification 폴더 내)을 이용한 분류 예측
+    '''
     print('property+empathy_analysis')
     print(f"anal00 분석리뷰수: {len(df)}")
     now=datetime.now().strftime('%y%m%d_%H%M')

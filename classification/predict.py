@@ -31,6 +31,8 @@ tokenizer = get_tokenizer()
 tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
 
 def predict(predict_sentence):
+    ''' 속성분류 예측: 매개변수(리뷰문장)
+    '''
 
     data = [predict_sentence, '0']
     dataset_another = [data]

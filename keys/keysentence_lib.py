@@ -1,10 +1,11 @@
 #-*- coding:utf-8 -*-
+# 핵심문장 추출을 위한 Function
 from krwordrank.sentence import keysentence
 import kss
 import pandas as pd
 from krwordrank.sentence import make_vocab_score, MaxScoreTokenizer
 
-# 3-1 키센텐스 추출하기
+# 키센텐스 추출하기
 def keysentence_list(texts, vocab_score, tokenizer):
     keys_list = []
     for i in range(len(texts)):
@@ -23,7 +24,7 @@ def keysentence_list(texts, vocab_score, tokenizer):
         else:   # 리뷰 내용이 없는경우
             continue
     
-#3-2 추출된 리뷰 중복값 제거   
+    # 추출된 리뷰 중복값 제거   
     new_keys_list = []
     for key_review in keys_list:
         if key_review not in new_keys_list:
@@ -56,7 +57,7 @@ def keys_list(all_keyword,stopword,review):
             else:   # 리뷰 내용이 없는경우
                 continue
                 
-    #3-2 추출된 리뷰 중복값 제거
+        #추출된 리뷰 중복값 제거
         for key_review in keys_list:
             if key_review not in new_keys_list:
                 new_keys_list.append(key_review)
@@ -81,6 +82,8 @@ def keys_df_error(analy_cd,site):
     return all_keysentece_result_df
 
 def total_sent(analy_cd, site, sent_list):
+    ''' 전체핵심문장 Dataframe으로 전환
+    '''
     total_sentence=pd.DataFrame({
             'ANAL_CODE':analy_cd,
             'KEYWORD_GUBUN':'1',
@@ -94,7 +97,7 @@ def total_sent(analy_cd, site, sent_list):
     return total_sentence
 
 def emo_pos_sent(analy_cd,site,sent_list):
-    '''긍정리뷰의 핵심문장 (분석코드, 사이트, 문장 리스트)'''
+    '''긍정리뷰의 핵심문장 (분석코드, 사이트, 문장 리스트) Dataframe으로 전환'''
     pos_sentence=pd.DataFrame({
             'ANAL_CODE':analy_cd,
             'KEYWORD_GUBUN':'1',
@@ -124,7 +127,7 @@ def pos_sent_error(analy_cd,site):
     return pos_keysentece_result_df
 
 def emo_neg_sent(analy_cd,site,sent_list):
-    '''부정리뷰의 핵심문장 (분석코드, 사이트, 문장 리스트)'''
+    '''부정리뷰의 핵심문장 (분석코드, 사이트, 문장 리스트) Dataframe 전환'''
     neg_sentence=pd.DataFrame({
             'ANAL_CODE':analy_cd,
             'KEYWORD_GUBUN':'1',

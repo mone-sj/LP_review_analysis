@@ -8,7 +8,7 @@ from krwordrank.word import *
 from keys.keysentence_lib import *
 from DB_conn import db
 
-today_path=db.today_path()
+today_path=db.today_path() # 당일 폴더 생성
 
 time_list=[]                                                    # exe time check
 none_review=[]
@@ -19,7 +19,7 @@ def total(code_list):
 
     col_name3=["ANAL_CODE","KEYWORD_GUBUN","SITE_GUBUN","RLT_VALUE_01","RLT_VALUE_02","RLT_VALUE_03","RLT_VALUE_04","RLT_VALUE_05",
     "RLT_VALUE_06","RLT_VALUE_07","RLT_VALUE_08","RLT_VALUE_09","RLT_VALUE_10"]
-    data_anal03=pd.DataFrame(columns=col_name3)                  # analysis result
+    data_anal03=pd.DataFrame(columns=col_name3)                  # analysis result Dataframe
 
     review_join=db.TB_REVIEW_join()
     total_time_start=time.time()
@@ -29,10 +29,10 @@ def total(code_list):
         df=review_join[review_join['ANAL_CODE']==code]
         review_count+=len(df)
 
-        stopword=db.TB_UNUSE_KEYWORD()                             # stopword load
+        stopword=db.TB_UNUSE_KEYWORD()                             # stopword load (불용어)
         for site_no in site_gubun:
             print(f"anal_code: {code} / 사이트구분: {site_no} 분석시작")
-            df_site_ori=df[df['SITE_GUBUN']==site_no]
+            df_site_ori=df[df['SITE_GUBUN']==site_no]              # 사이트별로 리뷰 분류
 
             if len(df_site_ori)==0:
                 print(f'anal_code: {code}\tsite_gubun:{site_no}\ttotal_review_없음')

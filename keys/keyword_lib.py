@@ -54,9 +54,12 @@ def keyword(freq,texts,stopwords):
     keywords_sw_apply= remove_stopwords_keywords(keyword_list, stopwords)
     return keywords_sw_apply
 
+#### 실제 사용 함수
 # min_count에 따른 리뷰 키워드 추출
 def keyword_minCount(texts, stopwords):
-    min_count_list=[4,2,1]
+    ''' 빈도수기반 키워드 추출'''
+    min_count_list=[4,2,1] 
+    # min_count: 단어의 최소빈도수, 리뷰수가 적으면 최소빈도수가 클수록 키워드가 출력되지 않음. 키워드 출력을 위해 min_count를 줄여야함
     for count in min_count_list:
         try:
             keywords_sw_apply=keyword(count,texts,stopwords)
@@ -93,8 +96,9 @@ def key_df_error(analy_cd,site):
     },index=[0])
     return all_keyword_result_df
 
-def noValueToBlank(list1):
-    '''값이 없는 곳은 빈칸처리'''
+def noValueToBlank(list1): # 키워드5개가 나오지 않으면 Null값이 아닌 빈값으로 처리
+    '''키워드 값이 없는 곳 빈칸처리
+    '''
     new_list=[]
     len_list=len(list1)
     if len_list < 6:
@@ -108,7 +112,7 @@ def noValueToBlank(list1):
 
         
 def total_key_df_result(analy_cd, site,list1):
-    '''전체 키워드 결과'''
+    '''전체 키워드 결과 DF 전환'''
     all_keyword_result_df=pd.DataFrame({
         'ANAL_CODE':analy_cd,
         'KEYWORD_GUBUN':'0',

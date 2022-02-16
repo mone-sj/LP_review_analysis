@@ -21,7 +21,7 @@ class BERTDataset(Dataset):
         return (len(self.labels))
 
 
-# num_classes 수정
+# num_classes 수정, 분류 수에 맞게 조정
 class BERTClassifier(nn.Module):
     def __init__(self,
                  bert,
