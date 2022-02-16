@@ -13,13 +13,14 @@ time_list=[]
 error_list=[]
 
 # 충북서버 LP용 감정분석 및 분류모델 URL
-classify_url = 'https://192.168.200.83:30001/deployment/hd9f94c1d7eec27394bce84741124f49b/'
+#classify_api = 'https://192.168.200.83:30001/deployment/hd9f94c1d7eec27394bce84741124f49b/'
 # Lipaco 서버용 분류모델 URL
-Lipaco_url='http://210.91.239.89/deployment/hab4e8860edc765dda4e30d629d0e196a/'
+classify_api='http://210.91.239.89/deployment/hab4e8860edc765dda4e30d629d0e196a/'
 
 # acryl서버 내 LP용 감정분석
-empathy_url = 'https://flightbase.acryl.ai/deployment/ha43a1099d17205a660a517a62bfd5203/'
+#empathy_url = 'https://flightbase.acryl.ai/deployment/ha43a1099d17205a660a517a62bfd5203/'
 # Lipaco 서버용 감정분석 모델 URL
+empathy_api='http://210.91.239.89/deployment/hd3656bd08ad06a0cad88f7319a2c49d9/'
 
 
 # 감정별 점수 리스트
@@ -50,10 +51,10 @@ def api(df): # api
         print(f'{i+1}번째 property+empathy 분석')
         review=result_df.iloc[i,3]
         try:
-            response_empathy=requests.post(Lipaco_url,json={'text':review},verify=True,timeout=180)
+            response_empathy=requests.post(empathy_api,json={'text':review},verify=True,timeout=180)
         except:
             time.sleep(2)
-            response_empathy=requests.post(Lipaco_url,json={'text':review},verify=True,timeout=180)
+            response_empathy=requests.post(empathy_api,json={'text':review},verify=True,timeout=180)
         
         result_empathy=response_empathy.json()
         output_empathy=result_empathy.get('columnchart')[0].get('output')[0]
@@ -73,10 +74,10 @@ def api(df): # api
 
         # classify
         try:
-            response_classify = requests.post(classify_url,json={'text':review},verify=False,timeout=180)
+            response_classify = requests.post(classify_api,json={'text':review},verify=False,timeout=180)
         except:
             time.sleep(2)
-            response_classify = requests.post(classify_url,json={'text':review},verify=False,timeout=180)
+            response_classify = requests.post(classify_api,json={'text':review},verify=False,timeout=180)
 
         result_classify=response_classify.json()
 
@@ -128,10 +129,10 @@ def model_pt(df): # API를 통한 결과값 출력의 실행시간을 단축하�
         
         # empathy_classification
         try:
-            response_empathy=requests.post(empathy_url,json={'text':review},verify=True,timeout=180)
+            response_empathy=requests.post(empathy_api,json={'text':review},verify=True,timeout=180)
         except:
             time.sleep(2)
-            response_empathy=requests.post(empathy_url,json={'text':review},verify=True,timeout=180)
+            response_empathy=requests.post(empathy_api,json={'text':review},verify=True,timeout=180)
         
         result_empathy=response_empathy.json()
 

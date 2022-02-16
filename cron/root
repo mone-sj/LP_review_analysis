@@ -1,6 +1,5 @@
 SHELL=/bin/bash
-#0 15 * * * * /home/asc/LP_review_analysis/cron/entrypoint.sh >> /var/log/cron.log 2>&1
 # */5 * * * * /home/entrypoint.sh >> /var/log/cron.log 2>&1
-0 0 * * * /home/LP_review_analysis/cron/analy.sh >> /var/log/cron.log 2>&1
-0 18 * * 0 /home/LP_review_analysis/cron/deleteLog.sh
+0 0 * * * /home/LP_review_analysis/cron/analy.sh > /var/log/cron.log 2>&1
+#0 18 * * 0 /home/LP_review_analysis/cron/deleteLog.sh
 # empty line

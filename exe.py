@@ -7,7 +7,7 @@ import time, traceback
 
 def analysis():
     to_date=datetime.now().strftime('%Y-%m-%d %H:%M:%S') # anal_date
-    from_date=db.last_isrt_dttm()
+    from_date=db.last_isrt_dttm() # last_isrt_dttm을 기준으로 이후 추가된 리뷰데이터를 DB에서 select
     print(f"to_date: {to_date}\nfrom_date:{from_date}")
 
     # select review for empathy/classify analysis

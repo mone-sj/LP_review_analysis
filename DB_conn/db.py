@@ -217,7 +217,7 @@ def TB_anal_03_insert(df):
     print('anal03 DB 저장 끝')
 
 def last_isrt_dttm():
-    '''최근 분석한 시간 읽기'''
+    '''수집된 리뷰의 마지막 수집시간체크'''
     with open('./etc/last_isrt_dttm.txt','r',encoding='utf8') as f:
         lines=f.readlines()
         last_line=len(lines)-1
