@@ -12,7 +12,7 @@ p.add_argument('--model_file', default='01_lp_classify_model.pt', type=str)
 
 args = p.parse_args()
 
-device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cuda:1' if torch.cuda.is_available() else 'cpu')
 print(device)
 bertmodel, vocab = get_pytorch_kobert_model()
 

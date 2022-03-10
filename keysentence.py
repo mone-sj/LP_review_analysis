@@ -24,14 +24,17 @@ def total(code_list):
     review_join=db.TB_REVIEW_join()
     total_time_start=time.time()
     review_count=0
+    product_count=0
 
     for code in code_list:
         df=review_join[review_join['ANAL_CODE']==code]
         review_count+=len(df)
+        product_count+=1
 
         stopword=db.TB_UNUSE_KEYWORD()                             # stopword load (불용어)
         for site_no in site_gubun:
-            print(f"anal_code: {code} / 사이트구분: {site_no} 분석시작")
+            now=datetime.now().strftime('%y%m%d_%H%M')
+            print(f"total - {len(code_list)}개 중 {product_count}번째 / anal_code: {code} / 사이트구분: {site_no} 분석시작 / 실행 시간: {now}")
             df_site_ori=df[df['SITE_GUBUN']==site_no]              # 사이트별로 리뷰 분류
 
             if len(df_site_ori)==0:
@@ -141,9 +144,10 @@ def total(code_list):
                     del all_keysentece_result_df                                                         # dataframe 초기화
 
     # Time check
-    now=datetime.now().strftime('%y%m%d_%H%M')
     total_time_end=time.time()
     total_time=total_time_end-total_time_start
+    now=datetime.now().strftime('%y%m%d_%H%M')
+    print(f'total_분석완료: {now}')
     # 분석날짜, 분류(total/emo), 분석제품수, 총 리뷰수, 분석시간
     time_list=[now,"total_key",len(code_list),review_count,total_time]
     
@@ -163,14 +167,16 @@ def emo(code_list):
     review_join=db.TB_REVIEW_join()
     emo_time_start=time.time()
     review_count=0
+    product_count=0
 
     for code in code_list:
         df=review_join[review_join['ANAL_CODE']==code]
-
         stopword=db.TB_UNUSE_KEYWORD()
+        product_count+=1
 
         for site_no in site_gubun:
-            print(f"anal_code: {code} / 사이트구분: {site_no}")
+            now=datetime.now().strftime('%y%m%d_%H%M')
+            print(f"emo - {len(code_list)}개 중 {product_count}번째 / anal_code: {code} / 사이트구분: {site_no} / 실행 시간: {now}")
             df_site_ori=df[df['SITE_GUBUN']==site_no]
             df_site=df_site_ori.copy()
             df_site['REVIEW'] = df_site_ori['REVIEW'].str.replace(pat=r'[^\w\s]', repl=r' ', regex=True)
@@ -387,9 +393,10 @@ def emo(code_list):
                     error_list.append(f'{analy_cd}_부정리뷰 없음')
                     none_review.append(f'{code}\tsite_gubun:{site_no}\temo_부정_review_없음')
     
-    now=datetime.now().strftime('%y%m%d_%H%M')
     emo_total_end=time.time()
     emo_total_time=emo_total_end-emo_time_start
+    now=datetime.now().strftime('%y%m%d_%H%M')
+    print(f'emo_분석완료: {now}')
     # 분석날짜, 분류(total/emo), 분석제품수, 총 리뷰수, 분석시간
     time_list=[now, "emo",len(code_list),review_count,emo_total_time]
 

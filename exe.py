@@ -13,15 +13,20 @@ def analysis():
     # select review for empathy/classify analysis
     df,isrt_dttm=db.TB_REIVEW_qa(from_date,to_date)
     
-    #REVIEW ANALYSIS
-    # # anal00=classify_empathy.api(df)                # api
-    anal00=classify_empathy.model_pt(df)                # pt
+    # REVIEW ANALYSIS
+    if len(df)==0: # insert된 리뷰가 없을때는 분류 프로세스를 실행하지 않음
+        print('insert no review: classification process pass')
+    else:
+        # # anal00=classify_empathy.api(df)                # api
+        anal00=classify_empathy.model_pt(df)                # pt
+        
+        # # anal00 insert
+        db.TB_anal_00_insert(anal00)
+        print('--------------------------------------DB insert--------------------------')
+        with open("./etc/last_isrt_dttm.txt","a",encoding='utf8') as f:
+            f.write(f'\n{to_date}\t{isrt_dttm}\t분석완료')
     
-    # # anal00 insert
-    db.TB_anal_00_insert(anal00)
-    print('--------------------------------------DB insert--------------------------')
-    with open("./etc/last_isrt_dttm.txt","a",encoding='utf8') as f:
-       f.write(f'\n{to_date}\t{isrt_dttm}\t분석완료')
+    
     anal00_anal_code_list=db.ANAL00_AanlCode() # 키워드 키센텐스 실행을 위한 code_list
 
     anal3 = keysentence.total(anal00_anal_code_list)

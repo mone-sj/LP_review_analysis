@@ -42,3 +42,7 @@ $ docker pull seojeongkim/py36_torch_anal:3.3
 5. 결과값 DB 저장
 6. 분석성공시 백업자료(분석결과 및 분석시 걸리는 시간 관련 자료) 메일 전송
 7. 에러 발생시 에러 관련 내용 메일 전송
+
+<br>
+<br>
+20220308_update

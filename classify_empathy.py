@@ -15,12 +15,12 @@ error_list=[]
 # 충북서버 LP용 감정분석 및 분류모델 URL
 #classify_api = 'https://192.168.200.83:30001/deployment/hd9f94c1d7eec27394bce84741124f49b/'
 # Lipaco 서버용 분류모델 URL
-classify_api='http://210.91.239.89/deployment/hab4e8860edc765dda4e30d629d0e196a/'
+classify_api='http://localhost/deployment/hab4e8860edc765dda4e30d629d0e196a/'
 
 # acryl서버 내 LP용 감정분석
 #empathy_url = 'https://flightbase.acryl.ai/deployment/ha43a1099d17205a660a517a62bfd5203/'
 # Lipaco 서버용 감정분석 모델 URL
-empathy_api='http://210.91.239.89/deployment/hd3656bd08ad06a0cad88f7319a2c49d9/'
+empathy_api='http://localhost/deployment/hd3656bd08ad06a0cad88f7319a2c49d9/'
 
 
 # 감정별 점수 리스트
@@ -34,10 +34,11 @@ score_1 = ['외로움', '후회', '실망', '두려움', '싫음', '미워함', 
 def api(df): # api
     ''' 감정분류/속성분류 API를 이용한 분류 예측
     '''
-    print('property+empathy_analysis')
-    print(f"anal00 분석리뷰수: {len(df)}")
     now=datetime.now().strftime('%y%m%d_%H%M')
     df.to_csv(f'{today_path}/{now}_TB_review_data.csv', index=None)
+    print(f'property+empathy_analysis 시작: {now}')
+    print(f"anal00 분석리뷰수: {len(df)}")
+    
     
     start_time=time.time()
     result_df=df.copy()
@@ -51,10 +52,10 @@ def api(df): # api
         print(f'{i+1}번째 property+empathy 분석')
         review=result_df.iloc[i,3]
         try:
-            response_empathy=requests.post(empathy_api,json={'text':review},verify=True,timeout=180)
+            response_empathy=requests.post(empathy_api,json={'text':review},verify=False,timeout=180)
         except:
             time.sleep(2)
-            response_empathy=requests.post(empathy_api,json={'text':review},verify=True,timeout=180)
+            response_empathy=requests.post(empathy_api,json={'text':review},verify=False,timeout=180)
         
         result_empathy=response_empathy.json()
         output_empathy=result_empathy.get('columnchart')[0].get('output')[0]
@@ -95,25 +96,26 @@ def api(df): # api
     anal_list=df_anal['ANAL_CODE'].tolist()
 
     end_time=time.time()
-    now=datetime.now().strftime('%y%m%d_%H%M')
     exe_time=end_time-start_time
+    now=datetime.now().strftime('%y%m%d_%H%M')
+    print(f'property+empathy_analysis 완료: {now}')
     # 분석날짜, 분류(total/emo), 분석제품수, 총 리뷰수, 분석시간
     time_list=[now,"empathy+classify_api",len(anal_list),len(data),exe_time]
 
     #save
     db.time_txt(time_list,f'{today_path}/time_check')
     db.save_txt(error_list,f'{today_path}/errorList')
-    data.to_csv(f'{today_path}/{now}_anal01_result.csv', index=None)
+    data.to_csv(f'{today_path}/{now}_anal00_result.csv', index=None)
     return data
 
 
 def model_pt(df): # API를 통한 결과값 출력의 실행시간을 단축하기 위해, 모델 파일을 사용
     ''' 감정분류API, 속성분류 모델파일(classification 폴더 내)을 이용한 분류 예측
     '''
-    print('property+empathy_analysis')
-    print(f"anal00 분석리뷰수: {len(df)}")
     now=datetime.now().strftime('%y%m%d_%H%M')
     df.to_csv(f'{today_path}/{now}_TB_review_data.csv', index=None)
+    print(f'property+empathy_analysis 시작: {now}')
+    print(f"anal00 분석리뷰수: {len(df)}")
 
     start_time=time.time()
     result_df=df.copy()
@@ -129,10 +131,10 @@ def model_pt(df): # API를 통한 결과값 출력의 실행시간을 단축하�
         
         # empathy_classification
         try:
-            response_empathy=requests.post(empathy_api,json={'text':review},verify=True,timeout=180)
+            response_empathy=requests.post(empathy_api,json={'text':review},verify=False,timeout=180)
         except:
             time.sleep(2)
-            response_empathy=requests.post(empathy_api,json={'text':review},verify=True,timeout=180)
+            response_empathy=requests.post(empathy_api,json={'text':review},verify=False,timeout=180)
         
         result_empathy=response_empathy.json()
 
@@ -163,13 +165,14 @@ def model_pt(df): # API를 통한 결과값 출력의 실행시간을 단축하�
     anal_list=df_anal['ANAL_CODE'].tolist()
 
     end_time=time.time()
-    now=datetime.now().strftime('%y%m%d_%H%M')
     exe_time=end_time-start_time
+    now=datetime.now().strftime('%y%m%d_%H%M')
+    print(f'property+empathy_analysis 완료: {now}')
     # 분석날짜, 분류(total/emo), 분석제품수, 총 리뷰수, 분석시간
     time_list=[now,"empathy+classify_pt",len(anal_list),len(data),exe_time]
 
     #save
     db.time_txt(time_list,f'{today_path}/time_check')
     db.save_txt(error_list,f'{today_path}/errorList')
-    data.to_csv(f'{today_path}/{now}_anal01_result.csv', index=None)
+    data.to_csv(f'{today_path}/{now}_anal00_result.csv', index=None)
     return data
