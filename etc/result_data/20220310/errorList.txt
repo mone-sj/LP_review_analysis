@@ -1,0 +1,24 @@
+20220310 18:17
+Traceback (most recent call last):
+  File "test.py", line 48, in <module>
+    analysis()
+  File "test.py", line 19, in analysis
+    tb_anal03=keysentence.total(anal00_anal_code_list)
+  File "D:\workspace\cb_nlp\LP_review_analysis\keysentence.py", line 34, in total
+    stopword=db.TB_UNUSE_KEYWORD()                             # stopword load
+  File "D:\workspace\cb_nlp\LP_review_analysis\DB_conn\db.py", line 79, in TB_UNUSE_KEYWORD
+    conn.close()
+UnboundLocalError: local variable 'conn' referenced before assignment
+
+20220310 18:43
+Traceback (most recent call last):
+  File "test.py", line 83, in <module>
+    analysis()
+  File "test.py", line 20, in analysis
+    tb_anal02=keysentence.emo(anal00_anal_code_list)
+  File "D:\workspace\cb_nlp\LP_review_analysis\keysentence.py", line 175, in emo
+    stopword=db.TB_UNUSE_KEYWORD()
+  File "D:\workspace\cb_nlp\LP_review_analysis\DB_conn\db.py", line 79, in TB_UNUSE_KEYWORD
+    conn.close()
+UnboundLocalError: local variable 'conn' referenced before assignment
+

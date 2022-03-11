@@ -7,12 +7,21 @@ from keys.keyword_lib import *
 from krwordrank.word import *
 from keys.keysentence_lib import *
 from DB_conn import db
+from multiprocessing import Pool
 
 today_path=db.today_path()
 
 time_list=[]                                                    # exe time check
 none_review=[]
 error_list=[]                                                   # error check list
+
+def multi_processing(code_list, func, num_cores):
+    list_split = np.array_split(code_list, num_cores)
+    pool = Pool(num_cores)
+    df = pd.concat(pool.map(func, list_split), ignore_index=True)
+    pool.close()
+    pool.join()
+    return df
 
 def total(code_list):
     site_gubun=db.site_gubun_list()                             # load crawling site code
@@ -22,16 +31,19 @@ def total(code_list):
     data_anal03=pd.DataFrame(columns=col_name3)                  # analysis result
 
     review_join=db.TB_REVIEW_join()
+    stopword=db.TB_UNUSE_KEYWORD()                             # stopword load
     total_time_start=time.time()
     review_count=0
+    product_count=0
 
     for code in code_list:
         df=review_join[review_join['ANAL_CODE']==code]
         review_count+=len(df)
-
-        stopword=db.TB_UNUSE_KEYWORD()                             # stopword load
+        product_count+=1
+        
         for site_no in site_gubun:
-            print(f"anal_code: {code} / 사이트구분: {site_no} 분석시작")
+            now=datetime.now().strftime('%y%m%d_%H%M')
+            print(f"total - {len(code_list)}개 중 {product_count} 번째 / anal_code: {code} / 사이트구분: {site_no} 분석시작 / 실행시간: {now}")
             df_site_ori=df[df['SITE_GUBUN']==site_no]
 
             if len(df_site_ori)==0:
@@ -141,18 +153,20 @@ def total(code_list):
                     del all_keysentece_result_df                                                         # dataframe 초기화
 
     # Time check
-    now=datetime.now().strftime('%y%m%d_%H%M')
     total_time_end=time.time()
     total_time=total_time_end-total_time_start
+    now=datetime.now().strftime('%y%m%d_%H%M')
+    print(f'total 분석 완료: {now}')
     # 분석날짜, 분류(total/emo), 분석제품수, 총 리뷰수, 분석시간
     time_list=[now,"total_key",len(code_list),review_count,total_time]
     
     # save
-    db.time_txt(time_list,f'{today_path}\\분석시간체크')
-    db.save_txt(none_review,f'{today_path}\\total_리뷰없는제품')
-    db.save_txt(error_list,f'{today_path}\\에러리스트')
-    data_anal03.to_csv(f'{today_path}\\{now}_anal03_result.csv', index=None)
+    db.time_txt(time_list,f'{today_path}\\time_check')
+    db.save_txt(none_review,f'{today_path}\\noneReviewProduct')
+    db.save_txt(error_list,f'{today_path}\\errorList')
+    #data_anal03.to_csv(f'{today_path}\\{now}_anal03_result.csv', index=None)
     return data_anal03
+
 
 def emo(code_list):
     site_gubun=db.site_gubun_list()     # load crawling site code
@@ -163,14 +177,16 @@ def emo(code_list):
     review_join=db.TB_REVIEW_join()
     emo_time_start=time.time()
     review_count=0
+    product_count=0
+    stopword=db.TB_UNUSE_KEYWORD()
 
     for code in code_list:
         df=review_join[review_join['ANAL_CODE']==code]
-
-        stopword=db.TB_UNUSE_KEYWORD()
+        product_count+=1
 
         for site_no in site_gubun:
-            print(f"anal_code: {code} / 사이트구분: {site_no}")
+            now=datetime.now().strftime('%y%m%d_%H%M')
+            print(f"emo - {len(code_list)} 중 {product_count} 번째 / anal_code: {code} / 사이트구분: {site_no} / 실행시간: {now}")
             df_site_ori=df[df['SITE_GUBUN']==site_no]
             df_site=df_site_ori.copy()
             df_site['REVIEW'] = df_site_ori['REVIEW'].str.replace(pat=r'[^\w\s]', repl=r' ', regex=True)
@@ -203,7 +219,7 @@ def emo(code_list):
 
                 elif len(pos_df)>5:
                     # 긍정 리뷰 리스트
-                    print('긍정리뷰 키워드/핵심문장 분석 시작')
+                    print(f'{len(code_list)} 중 {product_count} 번째 / anal_code: {code} / 긍정리뷰 키워드/핵심문장 분석 시작')
                     pos_review_list=pos_df['REVIEW'].tolist()
 
                     try:
@@ -235,7 +251,7 @@ def emo(code_list):
                     
                     #긍정리뷰 핵심문장
                     try:
-                        print("긍정리뷰 핵심문장 분석 시작")
+                        print(f"{len(code_list)} 중 {product_count} 번째 / 긍정리뷰 핵심문장 분석 시작")
                         # 키워드 리스트가 없으면, 센텐스 최신순으로 출력
                         if not pos_keyword:
                             list5 = pos_df.sort_values(by=['REVIEW_DOC_NO'],axis=0, ascending=False)
@@ -290,7 +306,7 @@ def emo(code_list):
 
 
                 # 부정 키워드
-                print("부정키워드/핵심문장 분석 시작")
+                print(f"{len(code_list)} 중 {product_count} 번째 /부정키워드/핵심문장 분석 시작")
                 neg_df=df_site[df_site['RLT_VALUE_03']<3]
                 
                 if 0< len(neg_df)<6:
@@ -338,7 +354,7 @@ def emo(code_list):
                 
                     #부정리뷰 키센텐스
                     try:
-                        print("부정리뷰 핵심문장 분석 시작")
+                        print(f"{len(code_list)} 중 {product_count} 번째 / 부정리뷰 핵심문장 분석 시작")
                         if not neg_keyword:    # 부정키워드 없으면 리뷰 최신순으로 센텐스 출력
                             list5 = neg_df.sort_values(by=['REVIEW_DOC_NO'],axis=0, ascending=False)
                             list5 = list5['REVIEW'].values.tolist()
@@ -386,17 +402,33 @@ def emo(code_list):
                     print('{}_부정리뷰부족'.format(analy_cd))
                     error_list.append(f'{analy_cd}_부정리뷰 없음')
                     none_review.append(f'{code}\tsite_gubun:{site_no}\temo_부정_review_없음')
-    
-    now=datetime.now().strftime('%y%m%d_%H%M')
+        
     emo_total_end=time.time()
     emo_total_time=emo_total_end-emo_time_start
+    now=datetime.now().strftime('%y%m%d_%H%M')
+    print(f'emo 분석완료: {now}')
     # 분석날짜, 분류(total/emo), 분석제품수, 총 리뷰수, 분석시간
     time_list=[now, "emo",len(code_list),review_count,emo_total_time]
 
     # save
-    db.time_txt(time_list,f'{today_path}\\분석시간체크')
-    db.save_txt(none_review,f'{today_path}\\total_리뷰없는제품')
-    db.save_txt(error_list,f'{today_path}\\에러리스트')
-    data_anal02.to_csv(f'{today_path}\\{now}_anal02_result.csv', index=None)
+    db.time_txt(time_list,f'{today_path}\\time_check')
+    db.save_txt(none_review,f'{today_path}\\noneReviewProduct')
+    db.save_txt(error_list,f'{today_path}\\errorList')
+    #data_anal02.to_csv(f'{today_path}\\{now}_anal02_result.csv', index=None)
 
     return data_anal02
+
+## multiprocessing
+def total_multi(code_list, num_cores):
+    ''' 전체리뷰의 키워드/핵심문장 알고리즘을 multiprocessing으로 실행'''
+    anal03=multi_processing(code_list,total,num_cores)
+    now=datetime.now().strftime('%y%m%d_%H%M%S')
+    anal03.to_csv(f'{today_path}\\{now}_anal03_result.csv', index=None)
+    return anal03
+
+def emo_multi(code_list, num_cores):
+    ''' 긍/부정 리뷰의 키워드/핵심문장 알고리즘을 multiprocessing으로 실행'''
+    anal02=multi_processing(code_list,emo,num_cores)
+    now=datetime.now().strftime('%y%m%d_%H%M%S')
+    anal02.to_csv(f'{today_path}\\{now}_anal02_result.csv', index=None)
+    return anal02
