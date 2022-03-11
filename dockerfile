@@ -36,6 +36,7 @@ RUN apt-get install vim -y
 ARG DEBIAN_FRONTEND=noninterative
 ENV TZ=Asia/Seoul
 RUN apt-get install -y tzdata
+RUN ln -sf /usr/local/lib/python3.6/dist-packages/pytz/zoneinfo/Asia/Seoul /etc/localtime
 
 # torch v1.7.1 / gpu
 RUN pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
