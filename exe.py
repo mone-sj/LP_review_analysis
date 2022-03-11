@@ -23,14 +23,18 @@ def analysis():
         # # anal00 insert
         db.TB_anal_00_insert(anal00)
         print('--------------------------------------DB insert--------------------------')
+        # review테이블에서 삭제된 리뷰를 동일하게 anal00에서도 삭제
+        db.TB_anal_00_delete()
         with open("./etc/last_isrt_dttm.txt","a",encoding='utf8') as f:
             f.write(f'\n{to_date}\t{isrt_dttm}\t분석완료')
     
     
     anal00_anal_code_list=db.ANAL00_AanlCode() # 키워드 키센텐스 실행을 위한 code_list
 
-    anal3 = keysentence.total(anal00_anal_code_list)
-    anal2 = keysentence.emo(anal00_anal_code_list)
+    num_cores=3 #multiprocessing의 process개수
+    
+    anal3 = keysentence.total_multi(anal00_anal_code_list,num_cores)
+    anal2 = keysentence.emo_multi(anal00_anal_code_list,num_cores)
     
     # anal03 / anal02 insert
     db.TB_anal_03_insert(anal3)
@@ -55,9 +59,9 @@ if __name__=='__main__':
         all_time=end_time-start_time
         
         # 분석날짜, 분류(total/emo), 분석제품수, 총 리뷰수, 분석시간
-        time_list=[datetime.now().strftime('%y%m%d'),"all_analy","-","-",all_time]
+        time_list=[datetime.now().strftime('%y%m%d-%H%M%S'),"all_analy","-","-",all_time]
         db.time_txt(time_list,f'{today_path}/time_check')
-        db.success_sendEmail() # 메일 전송
+        #db.success_sendEmail() # 메일 전송
 
     except Exception:
         err=traceback.format_exc()
@@ -66,5 +70,5 @@ if __name__=='__main__':
         e=f'{now}\n{err}'
         error_list.append(e)
         db.save_txt(error_list,f'{today_path}/errorList')
-        db.fail_sendEmail(e)  # 오류 메일 전송
+        #db.fail_sendEmail(e)  # 오류 메일 전송
         #analysis()
