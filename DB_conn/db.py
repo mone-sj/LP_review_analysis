@@ -129,6 +129,20 @@ def site_gubun_list():
         conn.close()
     return row
 
+def TB_anal_00_delete():
+    '''Review테이블에서 삭제된 리뷰를 TB_ANAL00 테이블에 동일하게 삭제 적용(procesure execute)'''
+    try:
+        conn = pymssql.connect(host, username, password, database, charset="cp949")
+        cursor=conn.cursor()
+        sql="exec dbo.P_MNG_ANA000 @section = 'DB'"
+        cursor.execute(sql)
+        conn.commit()
+        print("anal_00 리뷰 삭제 완료")
+    except Exception as e:
+        print(e)
+    finally:
+        conn.close()
+
 ''' DB insert'''
 def TB_anal_00_insert(df):
     '''분류(감정분석/속성분류) 결과 DB저장'''
@@ -246,7 +260,7 @@ def time_txt(content_list,file_path):
 ### send mail infomation
 sendEmail="asclhg@naver.com"
 recvEmail="seojeong@asc.kr"
-mail_pw="llhhgg0119@"
+mail_pw="발신메일의 비밀번호"
 
 smtpName="smtp.naver.com"
 smtpPort=587
