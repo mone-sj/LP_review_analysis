@@ -15,14 +15,6 @@ time_list=[]                                                    # exe time check
 none_review=[]
 error_list=[]                                                   # error check list
 
-def multi_processing(code_list, func, num_cores):
-    list_split = np.array_split(code_list, num_cores)
-    pool = Pool(num_cores)
-    df = pd.concat(pool.map(func, list_split), ignore_index=True)
-    pool.close()
-    pool.join()
-    return df
-
 def total(code_list):
     site_gubun=db.site_gubun_list()                             # load crawling site code
 
@@ -419,6 +411,15 @@ def emo(code_list):
     return data_anal02
 
 ## multiprocessing
+def multi_processing(code_list, func, num_cores):
+    '''분석 속도개선을 위한 multiprocessing'''
+    list_split = np.array_split(code_list, num_cores)
+    pool = Pool(num_cores)
+    df = pd.concat(pool.map(func, list_split), ignore_index=True)
+    pool.close()
+    pool.join()
+    return df
+
 def total_multi(code_list, num_cores):
     ''' 전체리뷰의 키워드/핵심문장 알고리즘을 multiprocessing으로 실행'''
     anal03=multi_processing(code_list,total,num_cores)

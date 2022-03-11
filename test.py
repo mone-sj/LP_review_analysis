@@ -10,12 +10,13 @@ from datetime import datetime
 import numpy as np
 
 
+
 #anal3=pd.read_csv('./etc/result_data/20220120/220120_1009_anal03_result_test.csv')
 
 #list1=['ANAL-211104-0001']
 #anal3 = keysentence.total(list1)
 #anal2=keysentence.emo(list1)
-
+'''
 def analysis():
     anal00_anal_code_list=db.ANAL00_AanlCode() # 키워드 키센텐스 실행을 위한 code_list
     print(f'analy_code 개수: {len(anal00_anal_code_list)}')
@@ -54,7 +55,7 @@ def analysis_multi():
     tb_anal02=parallelize_dataframe(anal00_anal_code_list, keysentence.emo, 3)
     
     #tb_anal03=keysentence.total(anal00_anal_code_list)
-    '''
+    
     tb_anal03=pd.DataFrame()
     pool=multiprocessing.Pool(processes=3)
     result=pool.map(keysentence.total, anal00_anal_code_list)
@@ -68,7 +69,7 @@ def analysis_multi():
     #         tb_anal03=pd.concat([tb_anal03, anal03], ignore_index=True)
     # pool.close()
     # pool.join()
-    '''
+    
     print(f'anal02길이: {len(tb_anal02)}')
     print(tb_anal02)
     
@@ -101,3 +102,5 @@ if __name__=='__main__':
         error_list.append(e)
         db.save_txt(error_list,f'{today_path}/errorList')
         #analysis()
+
+'''
