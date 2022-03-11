@@ -34,7 +34,7 @@ score_1 = ['외로움', '후회', '실망', '두려움', '싫음', '미워함', 
 def api(df): # api
     ''' 감정분류/속성분류 API를 이용한 분류 예측
     '''
-    now=datetime.now().strftime('%y%m%d_%H%M')
+    now=datetime.now().strftime('%y%m%d_%H%M%S')
     df.to_csv(f'{today_path}/{now}_TB_review_data.csv', index=None)
     print(f'property+empathy_analysis 시작: {now}')
     print(f"anal00 분석리뷰수: {len(df)}")
@@ -97,7 +97,7 @@ def api(df): # api
 
     end_time=time.time()
     exe_time=end_time-start_time
-    now=datetime.now().strftime('%y%m%d_%H%M')
+    now=datetime.now().strftime('%y%m%d_%H%M%S')
     print(f'property+empathy_analysis 완료: {now}')
     # 분석날짜, 분류(total/emo), 분석제품수, 총 리뷰수, 분석시간
     time_list=[now,"empathy+classify_api",len(anal_list),len(data),exe_time]
@@ -112,7 +112,7 @@ def api(df): # api
 def model_pt(df): # API를 통한 결과값 출력의 실행시간을 단축하기 위해, 모델 파일을 사용
     ''' 감정분류API, 속성분류 모델파일(classification 폴더 내)을 이용한 분류 예측
     '''
-    now=datetime.now().strftime('%y%m%d_%H%M')
+    now=datetime.now().strftime('%y%m%d_%H%M%S')
     df.to_csv(f'{today_path}/{now}_TB_review_data.csv', index=None)
     print(f'property+empathy_analysis 시작: {now}')
     print(f"anal00 분석리뷰수: {len(df)}")
@@ -166,7 +166,7 @@ def model_pt(df): # API를 통한 결과값 출력의 실행시간을 단축하�
 
     end_time=time.time()
     exe_time=end_time-start_time
-    now=datetime.now().strftime('%y%m%d_%H%M')
+    now=datetime.now().strftime('%y%m%d_%H%M%S')
     print(f'property+empathy_analysis 완료: {now}')
     # 분석날짜, 분류(total/emo), 분석제품수, 총 리뷰수, 분석시간
     time_list=[now,"empathy+classify_pt",len(anal_list),len(data),exe_time]

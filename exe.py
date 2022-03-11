@@ -62,7 +62,7 @@ if __name__=='__main__':
     except Exception:
         err=traceback.format_exc()
         print(f'1번째 error\n{err}')
-        now=datetime.now().strftime('%Y%m%d %H:%M')
+        now=datetime.now().strftime('%Y%m%d %H:%M:%S')
         e=f'{now}\n{err}'
         error_list.append(e)
         db.save_txt(error_list,f'{today_path}/errorList')
