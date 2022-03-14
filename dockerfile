@@ -41,11 +41,9 @@ RUN ln -sf /usr/local/lib/python3.6/dist-packages/pytz/zoneinfo/Asia/Seoul /etc/
 # torch v1.7.1 / gpu
 RUN pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
 
-
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r requirements.txt \
     && pip install git+https://github.com/lovit/KR-WordRank.git \
     && pip install git+https://git@github.com/SKTBrain/KoBERT.git@master
-
 
 SHELL [ "/bin/bash" ]

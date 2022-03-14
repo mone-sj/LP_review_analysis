@@ -23,12 +23,11 @@ def analysis():
         # # anal00 insert
         db.TB_anal_00_insert(anal00)
         print('--------------------------------------DB insert--------------------------')
-        # review테이블에서 삭제된 리뷰를 동일하게 anal00에서도 삭제
-        db.TB_anal_00_delete()
         with open("./etc/last_isrt_dttm.txt","a",encoding='utf8') as f:
             f.write(f'\n{to_date}\t{isrt_dttm}\t분석완료')
     
-    
+    # review테이블에서 삭제된 리뷰를 동일하게 anal00에서도 삭제
+    db.TB_anal_00_delete()
     anal00_anal_code_list=db.ANAL00_AanlCode() # 키워드 키센텐스 실행을 위한 code_list
 
     num_cores=3 #multiprocessing의 process개수
